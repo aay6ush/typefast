@@ -129,6 +129,12 @@ const Interface = () => {
       completeTest();
       return;
     }
+
+    if (newInput.length === text.length) {
+      completeTest();
+    } else {
+      setCurrentIndex(newInput.length);
+    }
   };
 
   const completeTest = () => {
