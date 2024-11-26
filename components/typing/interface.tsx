@@ -31,9 +31,8 @@ const Interface = () => {
   const charRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  const generateNewText = useCallback(() => {
     let newText;
-
     if (mode === "words") {
       newText = generateRandomWords(Number(modeOption));
     } else if (mode === "time") {
@@ -41,10 +40,39 @@ const Interface = () => {
     } else {
       newText = "This is a placeholder text.";
     }
-
     setText(newText);
-    resetTest();
   }, [mode, modeOption]);
+
+  const resetTest = useCallback(() => {
+    generateNewText();
+    setCurrentIndex(0);
+    setUserInput("");
+    setTimePassed(0);
+    setTimeStarted(false);
+    setRaceStarted(false);
+    setRaceCompleted(false);
+    setWpmData([]);
+    setMistakes([]);
+    if (inputRef.current) inputRef.current.focus();
+    setCaretPosition({ top: 0, left: 0 });
+  }, [generateNewText]);
+
+  useEffect(() => {
+    generateNewText();
+    resetTest();
+  }, [mode, modeOption, generateNewText, resetTest]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Tab") {
+        e.preventDefault();
+        resetTest();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [resetTest]);
 
   const updateCaretPosition = useCallback(() => {
     if (currentIndex >= 0 && currentIndex < charRefs.current.length) {
@@ -72,19 +100,6 @@ const Interface = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [updateCaretPosition]);
-
-  const resetTest = useCallback(() => {
-    setCurrentIndex(0);
-    setUserInput("");
-    setTimePassed(0);
-    setTimeStarted(false);
-    setRaceStarted(false);
-    setRaceCompleted(false);
-    setWpmData([]);
-    setMistakes([]);
-    if (inputRef.current) inputRef.current.focus();
-    setCaretPosition({ top: 0, left: 0 });
-  }, []);
 
   useEffect(() => {
     if (userInput.length === 1 && !timeStarted) {
@@ -184,7 +199,7 @@ const Interface = () => {
         return prev;
       });
     }
-  }, [timePassed, raceStarted, calculateWPM]);
+  }, [timePassed, raceStarted, userInput.length]);
 
   const characters = useMemo(() => {
     return text.split("").map((char, index) => ({
