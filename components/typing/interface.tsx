@@ -121,8 +121,13 @@ const Interface = () => {
     const newInput = e.target.value;
     setUserInput(newInput);
 
-    if (newInput[newInput.length - 1] !== text[newInput.length - 1]) {
-      setMistakes((prev) => [...prev, newInput.length - 1]);
+    if (newInput.length < userInput.length) {
+      setMistakes((prev) => prev.filter((index) => index !== newInput.length));
+    } else if (newInput.length > 0) {
+      const lastCharIndex = newInput.length - 1;
+      if (newInput[lastCharIndex] !== text[lastCharIndex]) {
+        setMistakes((prev) => [...prev, lastCharIndex]);
+      }
     }
 
     if (mode === "time" && timePassed >= modeOption) {
