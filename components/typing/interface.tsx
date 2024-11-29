@@ -258,18 +258,19 @@ const Interface = () => {
             ))}
 
             <motion.span
-              className="border-r-2 border-neutral-200 absolute h-8"
+              className="border-r-2 border-neutral-200 absolute h-8 opacity-100"
               style={{
                 top: `${caretPosition.top}px`,
                 left: `${caretPosition.left}px`,
               }}
+              initial={{
+                // top: caretPosition.top - 1,
+                left: caretPosition.left - 0.01,
+              }}
               animate={{
-                opacity: [1, 0],
-                transition: {
-                  duration: 0.5,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                },
+                // opacity: [1, 0],
+                // top: caretPosition.top,
+                left: caretPosition.left,
               }}
             />
 
