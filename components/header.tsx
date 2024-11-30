@@ -1,7 +1,10 @@
 "use client";
 
-import { User, Crown, Zap } from "lucide-react";
+import { User, Crown, Zap, LogOut, Sword, Swords } from "lucide-react";
 import Link from "next/link";
+import { Button, buttonVariants } from "./ui/button";
+import { cn } from "@/lib/utils";
+import { signOut } from "next-auth/react";
 
 export function Header() {
   return (
@@ -15,19 +18,31 @@ export function Header() {
           Type<span className="text-emerald-500">Fast</span>
         </p>
       </Link>
-      <div className="flex space-x-6">
+      <div className="flex space-x-1 items-center">
         <Link
           href="/leaderboard"
-          className="text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800/50"
+          className={cn(buttonVariants({ variant: "ghost", size: "icon" }))}
         >
-          <Crown />
+          <Crown className="!size-6" />
         </Link>
+
+        <Link
+          href="/multiplayer"
+          className={cn(buttonVariants({ variant: "ghost", size: "icon" }))}
+        >
+          <Swords className="!size-6" />
+        </Link>
+
         <Link
           href="/profile"
-          className="text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800/50"
+          className={cn(buttonVariants({ variant: "ghost", size: "icon" }))}
         >
-          <User />
+          <User className="!size-6" />
         </Link>
+
+        <Button variant="ghost" size="icon" onClick={() => signOut()}>
+          <LogOut className="!size-6" />
+        </Button>
       </div>
     </header>
   );

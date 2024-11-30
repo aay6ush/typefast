@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Geist_Mono } from "next/font/google";
 import { Header } from "@/components/header";
+import { Toaster } from "@/components/ui/toaster";
 
 const geistMono = Geist_Mono({
   subsets: ["latin"],
@@ -9,9 +10,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TypeFast",
+  title: "TypeFast - Master Your Typing Skills",
   description:
-    "Sharpen your typing skills with our engaging and competitive app! Race against time, challenge friends, and track your improvement with real-time stats in a sleek, minimalist interface.",
+    "Practice typing, challenge friends, and track improvements with real-time stats in a sleek, minimalist interface.",
 };
 
 export default function RootLayout({
@@ -26,6 +27,7 @@ export default function RootLayout({
       >
         <Header />
         {children}
+        <Toaster />
       </body>
     </html>
   );

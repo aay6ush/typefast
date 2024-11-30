@@ -72,3 +72,9 @@ export type AchievementsProps = {
     achieved: boolean;
   }[];
 };
+
+export type FeatureCardProps = {
+  icon: ReactNode;
+  title: string;
+  description: string;
+};
