@@ -299,9 +299,11 @@ const Interface = () => {
         <Result
           wpm={wpm}
           accuracy={accuracy}
-          timeElapsed={timePassed}
+          time={timePassed}
           wpmData={wpmData}
           onRestart={resetTest}
+          mode={mode}
+          modeOption={modeOption}
         />
       )}
     </AnimatePresence>

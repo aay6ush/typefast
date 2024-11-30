@@ -15,14 +15,37 @@ import {
   ReferenceLine,
 } from "recharts";
 import { ResultProps, StatCardProps } from "@/types";
+import { useEffect } from "react";
+import { addTest } from "@/actions/test";
 
 const Result = ({
   wpm,
   accuracy,
-  timeElapsed,
+  time,
   wpmData,
   onRestart,
+  mode,
+  modeOption,
 }: ResultProps) => {
+  useEffect(() => {
+    const saveTest = async () => {
+      try {
+        if (!wpm || !accuracy || !time || !mode || !modeOption) return;
+        await addTest({
+          wpm,
+          accuracy: parseFloat(accuracy.toFixed(2)),
+          time,
+          mode,
+          modeOption,
+        });
+      } catch (error) {
+        console.error("Failed to save test result:", error);
+      }
+    };
+
+    saveTest();
+  });
+
   const averageWPM = Math.round(
     wpmData.reduce((sum, data) => sum + data.wpm, 0) / wpmData.length
   );
@@ -68,7 +91,7 @@ const Result = ({
         <StatCard
           icon={<Clock className="w-6 h-6" />}
           title="Time"
-          value={`${timeElapsed}s`}
+          value={`${time}s`}
           color="text-violet-400"
         />
       </motion.div>
