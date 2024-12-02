@@ -35,7 +35,7 @@ const itemVariants = {
 const Testimonials = () => {
   return (
     <section className="py-20">
-      <div className="container mx-auto px-4">
+      <div className="max-w-5xl mx-auto px-4">
         <motion.h2
           variants={itemVariants}
           initial="hidden"
@@ -43,7 +43,7 @@ const Testimonials = () => {
           className="text-3xl sm:text-4xl md:text-5xl text-neutral-200 font-bold text-center mb-12"
         >
           What Our{" "}
-          <span className="underline underline-offset-8 decoration-emerald-500 decoration-wavy">
+          <span className="underline underline-offset-8 decoration-emerald-500">
             Users
           </span>{" "}
           Say

@@ -99,7 +99,7 @@ const Leaderboard = () => {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="w-full max-w-5xl mx-auto space-y-8 pb-8 px-4 sm:px-6 lg:px-8"
+      className="w-full max-w-5xl mx-auto space-y-8 pb-8 px-4 sm:px-6 lg:px-8 mt-10"
     >
       <motion.div variants={itemVariants}>
         <Card className="bg-neutral-900/50 border-neutral-800 shadow-lg">

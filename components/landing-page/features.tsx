@@ -45,7 +45,7 @@ const Features = () => {
         className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 text-neutral-200"
       >
         Why Choose{" "}
-        <span className="underline underline-offset-8 decoration-emerald-500 decoration-wavy">
+        <span className="underline underline-offset-8 decoration-emerald-500">
           TypeFast
         </span>
         ?

@@ -105,7 +105,7 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-4">
+    <div className="flex items-center justify-center mt-10 p-4">
       <motion.div
         variants={containerVariants}
         initial="hidden"

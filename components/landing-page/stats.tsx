@@ -21,7 +21,7 @@ const itemVariants = {
 const Stats = () => {
   return (
     <section className="py-20 relative">
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="max-w-5xl mx-auto px-4 relative z-10">
         <motion.h2
           variants={itemVariants}
           initial="hidden"
@@ -29,7 +29,7 @@ const Stats = () => {
           className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-neutral-200 mb-12"
         >
           TypeFast by{" "}
-          <span className="underline underline-offset-8 decoration-emerald-500 decoration-wavy">
+          <span className="underline underline-offset-8 decoration-emerald-500">
             Numbers
           </span>
         </motion.h2>
