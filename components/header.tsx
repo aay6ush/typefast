@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  User,
-  Crown,
-  Zap,
-  LogOut,
-  Sword,
-  Swords,
-  Keyboard,
-} from "lucide-react";
+import { Zap, LogOut } from "lucide-react";
 import Link from "next/link";
 import { Button, buttonVariants } from "./ui/button";
 import { cn } from "@/lib/utils";
@@ -55,13 +47,20 @@ export function Header() {
               </TooltipContent>
             </Tooltip>
           ))}
-        </TooltipProvider>
 
-        {session && (
-          <Button variant="ghost" size="icon" onClick={() => signOut()}>
-            <LogOut className="!size-6" />
-          </Button>
-        )}
+          {session && (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="ghost" size="icon" onClick={() => signOut()}>
+                  <LogOut className="!size-6" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Sign Out</p>
+              </TooltipContent>
+            </Tooltip>
+          )}
+        </TooltipProvider>
       </nav>
     </header>
   );

@@ -78,3 +78,12 @@ export type FeatureCardProps = {
   title: string;
   description: string;
 };
+
+export type LeaderboardDataType = {
+  rank: number;
+  name: string;
+  wpm: number;
+  accuracy: number;
+  time: number;
+  mode: string;
+};
