@@ -5,8 +5,11 @@ import Link from "next/link";
 import { Button, buttonVariants } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 export function Header() {
+  const { data: session } = useSession();
+
   return (
     <header className="w-full max-w-5xl mx-auto flex items-center justify-between px-6 py-4">
       <Link
@@ -40,9 +43,11 @@ export function Header() {
           <User className="!size-6" />
         </Link>
 
-        <Button variant="ghost" size="icon" onClick={() => signOut()}>
-          <LogOut className="!size-6" />
-        </Button>
+        {session && (
+          <Button variant="ghost" size="icon" onClick={() => signOut()}>
+            <LogOut className="!size-6" />
+          </Button>
+        )}
       </div>
     </header>
   );
