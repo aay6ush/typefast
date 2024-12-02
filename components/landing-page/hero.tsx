@@ -57,7 +57,7 @@ const Hero = () => {
             asChild
             className="bg-emerald-500 hover:bg-emerald-600 text-black font-semibold"
           >
-            <Link href="/auth">
+            <Link href="/type">
               Start Typing Now <ArrowRight className="ml-2" />
             </Link>
           </Button>

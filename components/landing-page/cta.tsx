@@ -42,7 +42,7 @@ const CTA = () => {
           className="text-3xl sm:text-4xl md:text-5xl font-bold text-neutral-200 tracking-tight"
         >
           Ready to Become a{" "}
-          <span className="underline underline-offset-8 decoration-emerald-500 decoration-wavy">
+          <span className="underline underline-offset-8 decoration-emerald-500">
             Typing Pro
           </span>
           ?
@@ -60,7 +60,7 @@ const CTA = () => {
             asChild
             className="bg-emerald-500 hover:bg-emerald-600 text-black font-semibold"
           >
-            <Link href="/auth">
+            <Link href="/type">
               Get Started for Free <ArrowRight className="ml-2" />
             </Link>
           </Button>
