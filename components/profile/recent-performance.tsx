@@ -21,8 +21,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
+import { RecentPerformanceProps } from "@/types";
 
-const RecentPerformance = ({ recentTests }) => {
+const RecentPerformance = ({ recentTests }: RecentPerformanceProps) => {
   console.log(recentTests);
 
   const [chartType, setChartType] = useState<"bar" | "line">("bar");

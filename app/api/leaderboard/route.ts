@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import redis from "@/lib/redis";
 import { auth } from "@/auth";
+import { LeaderboardDataType, LeaderboardEntry } from "@/types";
 
 const ALL_TIME_LEADERBOARD = "typefast:leaderboard:alltime";
 const DAILY_LEADERBOARD = "typefast:leaderboard:daily";
@@ -20,9 +21,9 @@ export const GET = async (request: NextRequest) => {
       withScores: true,
     });
 
-    const leaderboard = [];
+    const leaderboard: LeaderboardDataType[] = [];
     for (let i = 0; i < scores.length; i += 2) {
-      const userData = JSON.parse(scores[i].member as string);
+      const userData = scores[i] as LeaderboardEntry;
 
       if (mode === "all" || userData.mode === mode) {
         leaderboard.push({

@@ -87,3 +87,9 @@ export type LeaderboardDataType = {
   time: number;
   mode: string;
 };
+
+export type RecentPerformanceProps = {
+  recentTests: { date: string; wpm: number }[];
+};
+
+type LeaderboardEntry = Omit<LeaderboardDataType, "rank">;
