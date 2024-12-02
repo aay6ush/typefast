@@ -15,16 +15,14 @@ export const GET = async (request: NextRequest) => {
     timeFrame === "daily" ? DAILY_LEADERBOARD : ALL_TIME_LEADERBOARD;
 
   try {
-    const scores = await redis.zrevrange(
-      leaderboardKey,
-      0,
-      limit - 1,
-      "WITHSCORES"
-    );
+    const scores = await redis.zrange(leaderboardKey, 0, limit - 1, {
+      rev: true,
+      withScores: true,
+    });
 
     const leaderboard = [];
     for (let i = 0; i < scores.length; i += 2) {
-      const userData = JSON.parse(scores[i]);
+      const userData = JSON.parse(scores[i].member as string);
 
       if (mode === "all" || userData.mode === mode) {
         leaderboard.push({
@@ -80,8 +78,8 @@ export const POST = async (request: NextRequest) => {
     });
 
     await Promise.all([
-      redis.zadd(ALL_TIME_LEADERBOARD, score, userData),
-      redis.zadd(DAILY_LEADERBOARD, score, userData),
+      redis.zadd(ALL_TIME_LEADERBOARD, { score, member: userData }),
+      redis.zadd(DAILY_LEADERBOARD, { score, member: userData }),
     ]);
 
     const midnight = new Date();
