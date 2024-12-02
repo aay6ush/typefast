@@ -1,11 +1,26 @@
 "use client";
 
-import { User, Crown, Zap, LogOut, Sword, Swords } from "lucide-react";
+import {
+  User,
+  Crown,
+  Zap,
+  LogOut,
+  Sword,
+  Swords,
+  Keyboard,
+} from "lucide-react";
 import Link from "next/link";
 import { Button, buttonVariants } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
+import { NAVLINKS } from "@/constants";
 
 export function Header() {
   const { data: session } = useSession();
@@ -21,34 +36,33 @@ export function Header() {
           Type<span className="text-emerald-500">Fast</span>
         </p>
       </Link>
-      <div className="flex space-x-1 items-center">
-        <Link
-          href="/leaderboard"
-          className={cn(buttonVariants({ variant: "ghost", size: "icon" }))}
-        >
-          <Crown className="!size-6" />
-        </Link>
-
-        <Link
-          href="/multiplayer"
-          className={cn(buttonVariants({ variant: "ghost", size: "icon" }))}
-        >
-          <Swords className="!size-6" />
-        </Link>
-
-        <Link
-          href="/profile"
-          className={cn(buttonVariants({ variant: "ghost", size: "icon" }))}
-        >
-          <User className="!size-6" />
-        </Link>
+      <nav className="flex space-x-1.5 items-center">
+        <TooltipProvider>
+          {NAVLINKS.map((link) => (
+            <Tooltip key={link.id}>
+              <TooltipTrigger>
+                <Link
+                  href={link.href}
+                  className={cn(
+                    buttonVariants({ variant: "ghost", size: "icon" })
+                  )}
+                >
+                  <link.icon className="!size-6" />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{link.name}</p>
+              </TooltipContent>
+            </Tooltip>
+          ))}
+        </TooltipProvider>
 
         {session && (
           <Button variant="ghost" size="icon" onClick={() => signOut()}>
             <LogOut className="!size-6" />
           </Button>
         )}
-      </div>
+      </nav>
     </header>
   );
 }

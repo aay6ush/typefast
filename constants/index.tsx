@@ -1,4 +1,14 @@
-import { Award, BarChart2, Clock, Users, Zap } from "lucide-react";
+import {
+  Award,
+  BarChart2,
+  Clock,
+  Crown,
+  Keyboard,
+  Swords,
+  User,
+  Users,
+  Zap,
+} from "lucide-react";
 
 export const modes = ["time", "words"];
 export const timeOptions = [15, 30];
@@ -7,7 +17,7 @@ export const wordOptions = [10, 25, 50];
 export const DEFAULT_TEST_MODE = "time";
 export const DEFAULT_TEST_MODE_OPTION = 15;
 
-export const publicRoutes = ["/", "/type"];
+export const publicRoutes = ["/", "/leaderboard", "/type"];
 export const authRoutes = ["/auth"];
 export const apiAuthPrefix = "/api/auth";
 export const DEFAULT_LOGIN_REDIRECT = "/type";
@@ -69,5 +79,32 @@ export const DEFAULT_TESTIMONIALS = [
     quote:
       "Challenging friends has made practicing typing so much more fun and engaging. I look forward to it every day!",
     author: "Emily T.",
+  },
+];
+
+export const NAVLINKS = [
+  {
+    id: 1,
+    name: "Type",
+    href: "/type",
+    icon: Keyboard,
+  },
+  {
+    id: 2,
+    name: "Multiplayer",
+    href: "/multiplayer",
+    icon: Swords,
+  },
+  {
+    id: 3,
+    name: "Leaderboard",
+    href: "/leaderboard",
+    icon: Crown,
+  },
+  {
+    id: 4,
+    name: "Profile",
+    href: "/profile",
+    icon: User,
   },
 ];
