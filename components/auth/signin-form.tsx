@@ -16,6 +16,8 @@ import { signInSchema, SignInValues } from "@/lib/schemas";
 import { useTransition } from "react";
 import { login } from "@/actions/login";
 import { toast } from "sonner";
+import { signIn } from "next-auth/react";
+import { DEFAULT_LOGIN_REDIRECT } from "@/constants";
 
 const childVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -47,6 +49,13 @@ const SignInForm = () => {
         const result = await login(values);
 
         if (result.success) {
+          await signIn("credentials", {
+            email: values.email,
+            password: values.password,
+            redirect: true,
+            callbackUrl: DEFAULT_LOGIN_REDIRECT,
+          });
+
           toast.success(result.message);
         } else {
           toast.error(result.message);

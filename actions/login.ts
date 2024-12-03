@@ -1,10 +1,9 @@
 "use server";
 
-import { signIn } from "@/auth";
-import { DEFAULT_LOGIN_REDIRECT } from "@/constants";
-import { getUserByEmail } from "@/db/user";
 import { signInSchema } from "@/lib/schemas";
+import { getUserByEmail } from "@/db/user";
 import { AuthError } from "next-auth";
+import bcrypt from "bcryptjs";
 import { z } from "zod";
 
 export const login = async (values: z.infer<typeof signInSchema>) => {
@@ -27,24 +26,17 @@ export const login = async (values: z.infer<typeof signInSchema>) => {
   }
 
   try {
-    await signIn("credentials", {
-      email,
+    const passwordsMatch = await bcrypt.compare(
       password,
-      redirectTo: DEFAULT_LOGIN_REDIRECT,
-    });
-    return { success: true, message: "Logged in successfully!" };
-  } catch (error) {
-    console.error("Login error:", error);
-    if (error instanceof AuthError) {
-      console.error("AuthError type:", error.type);
-      switch (error.type) {
-        case "CredentialsSignin":
-          return { success: false, message: "Invalid Credentials" };
-        default:
-          return { success: false, message: "Something went wrong" };
-      }
+      existingUser.password
+    );
+
+    if (!passwordsMatch) {
+      return { success: false, message: "Invalid credentials" };
     }
 
-    throw error;
+    return { success: true, message: "Logged in successfully!" };
+  } catch (error) {
+    return { success: false, message: "Internal server error!" };
   }
 };
