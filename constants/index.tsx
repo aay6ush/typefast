@@ -17,7 +17,7 @@ export const wordOptions = [10, 25, 50];
 export const DEFAULT_TEST_MODE = "time";
 export const DEFAULT_TEST_MODE_OPTION = 15;
 
-export const publicRoutes = ["/", "/leaderboard", "/type"];
+export const publicRoutes = ["/", "/leaderboard", "/type", "/api/leaderboard"];
 export const authRoutes = ["/auth", "/auth/verification"];
 export const apiAuthPrefix = "/api/auth";
 export const DEFAULT_LOGIN_REDIRECT = "/type";
