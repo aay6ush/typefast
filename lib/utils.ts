@@ -3,6 +3,9 @@ import { twMerge } from "tailwind-merge";
 import { generate } from "random-words";
 import { XP_PER_TEST } from "@/constants";
 import { Test } from "@prisma/client";
+import { getVerificationTokenByEmail } from "@/db/token";
+import { prisma } from "@/prisma/db";
+import { v4 as uuidv4 } from "uuid";
 
 export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs));
@@ -112,4 +115,29 @@ export const getMedalColor = (rank: number) => {
     default:
       return "text-gray-400";
   }
+};
+
+export const generateVerificationToken = async (email: string) => {
+  const token = uuidv4();
+  const expires = new Date(new Date().getTime() + 3600 * 1000);
+
+  const existingToken = await getVerificationTokenByEmail(email);
+
+  if (existingToken) {
+    await prisma.verificationToken.delete({
+      where: {
+        id: existingToken.id,
+      },
+    });
+  }
+
+  const verificationToken = await prisma.verificationToken.create({
+    data: {
+      token,
+      expiresAt: expires,
+      email,
+    },
+  });
+
+  return verificationToken;
 };

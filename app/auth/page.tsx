@@ -1,20 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import {
   Card,
   CardContent,
@@ -24,80 +11,26 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Mail, Lock, User, ArrowRight, Chrome } from "lucide-react";
-import {
-  signInSchema,
-  signUpSchema,
-  SignInValues,
-  SignUpValues,
-} from "@/lib/schemas";
-import { useToast } from "@/hooks/use-toast";
+import { Chrome } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { DEFAULT_LOGIN_REDIRECT } from "@/constants";
+import SignInForm from "@/components/auth/signin-form";
+import SignUpForm from "@/components/auth/signup-form";
+
+const containerVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      damping: 20,
+      stiffness: 100,
+    },
+  },
+};
 
 const AuthPage = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const { toast } = useToast();
-
-  const signInForm = useForm<SignInValues>({
-    resolver: zodResolver(signInSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
-
-  const signUpForm = useForm<SignUpValues>({
-    resolver: zodResolver(signUpSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      password: "",
-    },
-  });
-
-  async function onSignIn(values: SignInValues) {
-    // TODO: Make api call
-    toast({
-      title: "Sign In Successful",
-      description: "Welcome back!",
-    });
-  }
-
-  async function onSignUp(values: SignUpValues) {
-    // TODO: Make api call
-    toast({
-      title: "Sign Up Successful",
-      description: "Your account has been created.",
-    });
-  }
-
-  const containerVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        damping: 20,
-        stiffness: 100,
-      },
-    },
-  };
-
-  const childVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        damping: 20,
-        stiffness: 100,
-      },
-    },
-  };
-
   const handleClick = () => {
     signIn("google", {
       callbackUrl: DEFAULT_LOGIN_REDIRECT,
@@ -138,186 +71,10 @@ const AuthPage = () => {
                 </TabsTrigger>
               </TabsList>
               <TabsContent value="signin">
-                <Form {...signInForm}>
-                  <form
-                    onSubmit={signInForm.handleSubmit(onSignIn)}
-                    className="space-y-4"
-                  >
-                    <motion.div variants={childVariants}>
-                      <FormField
-                        control={signInForm.control}
-                        name="email"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-neutral-200">
-                              Email
-                            </FormLabel>
-                            <FormControl>
-                              <div className="relative">
-                                <Mail className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                                <Input
-                                  placeholder="johndoe@example.com"
-                                  {...field}
-                                  className="pl-10"
-                                />
-                              </div>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </motion.div>
-                    <motion.div variants={childVariants}>
-                      <FormField
-                        control={signInForm.control}
-                        name="password"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-neutral-200">
-                              Password
-                            </FormLabel>
-                            <FormControl>
-                              <div className="relative">
-                                <Lock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                                <Input
-                                  type="password"
-                                  placeholder="********"
-                                  {...field}
-                                  className="pl-10"
-                                />
-                              </div>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </motion.div>
-                    <Button
-                      className="w-full bg-neutral-800 text-neutral-300"
-                      type="submit"
-                      disabled={isLoading}
-                    >
-                      {isLoading ? (
-                        <motion.div
-                          className="h-5 w-5 rounded-full border-t-2 border-r-2 border-white"
-                          animate={{ rotate: 360 }}
-                          transition={{
-                            duration: 1,
-                            repeat: Infinity,
-                            ease: "linear",
-                          }}
-                        />
-                      ) : (
-                        <>
-                          Sign In <ArrowRight className="ml-2 h-5 w-5" />
-                        </>
-                      )}
-                    </Button>
-                  </form>
-                </Form>
+                <SignInForm />
               </TabsContent>
               <TabsContent value="signup">
-                <Form {...signUpForm}>
-                  <form
-                    onSubmit={signUpForm.handleSubmit(onSignUp)}
-                    className="space-y-4"
-                  >
-                    <motion.div variants={childVariants}>
-                      <FormField
-                        control={signUpForm.control}
-                        name="name"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-neutral-200">
-                              Name
-                            </FormLabel>
-                            <FormControl>
-                              <div className="relative">
-                                <User className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                                <Input
-                                  placeholder="John Doe"
-                                  {...field}
-                                  className="pl-10"
-                                />
-                              </div>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </motion.div>
-                    <motion.div variants={childVariants}>
-                      <FormField
-                        control={signUpForm.control}
-                        name="email"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-neutral-200">
-                              Email
-                            </FormLabel>
-                            <FormControl>
-                              <div className="relative">
-                                <Mail className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                                <Input
-                                  placeholder="johndoe@example.com"
-                                  {...field}
-                                  className="pl-10"
-                                />
-                              </div>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </motion.div>
-                    <motion.div variants={childVariants}>
-                      <FormField
-                        control={signUpForm.control}
-                        name="password"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-neutral-200">
-                              Password
-                            </FormLabel>
-                            <FormControl>
-                              <div className="relative">
-                                <Lock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                                <Input
-                                  type="password"
-                                  placeholder="********"
-                                  {...field}
-                                  className="pl-10"
-                                />
-                              </div>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </motion.div>
-                    <Button
-                      className="w-full bg-neutral-800 text-neutral-300"
-                      type="submit"
-                      disabled={isLoading}
-                    >
-                      {isLoading ? (
-                        <motion.div
-                          className="h-5 w-5 rounded-full border-t-2 border-r-2 border-white"
-                          animate={{ rotate: 360 }}
-                          transition={{
-                            duration: 1,
-                            repeat: Infinity,
-                            ease: "linear",
-                          }}
-                        />
-                      ) : (
-                        <>
-                          Sign Up <ArrowRight className="ml-2 h-5 w-5" />
-                        </>
-                      )}
-                    </Button>
-                  </form>
-                </Form>
+                <SignUpForm />
               </TabsContent>
             </Tabs>
           </CardContent>

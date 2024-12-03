@@ -10,7 +10,8 @@
     "db:push": "prisma db push",
     "db:studio": "prisma studio",
     "db:seed": "prisma db seed",
-    "db:migrate": "prisma migrate dev"
+    "db:migrate": "prisma migrate dev",
+    "db:generate": "prisma generate"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.7.4",
@@ -39,13 +40,18 @@
     "lucide-react": "^0.460.0",
     "next": "15.0.3",
     "next-auth": "5.0.0-beta.25",
+    "next-themes": "^0.4.3",
     "random-words": "^2.0.1",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
     "react-hook-form": "^7.53.2",
+    "react-spinners": "^0.14.1",
     "recharts": "^2.13.3",
+    "resend": "^4.0.1",
+    "sonner": "^1.7.0",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
+    "uuid": "^11.0.3",
     "zod": "^3.23.8"
   },
   "devDependencies": {

@@ -42,6 +42,15 @@ model Account {
   @@id([provider, providerAccountId])
 }
 
+model VerificationToken {
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique
+  expiresAt DateTime
+
+  @@unique([email, token])
+}
+
 model Test {
   id         String @id @default(cuid())
   wpm        Int

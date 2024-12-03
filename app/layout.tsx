@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Geist_Mono } from "next/font/google";
 import { Header } from "@/components/header";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "@/components/ui/sonner";
 import { SessionProvider } from "next-auth/react";
 
 const geistMono = Geist_Mono({
@@ -29,7 +29,7 @@ export default function RootLayout({
         >
           <Header />
           {children}
-          <Toaster />
+          <Toaster richColors />
         </body>
       </html>
     </SessionProvider>

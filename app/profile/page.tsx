@@ -6,6 +6,9 @@ import RecentPerformance from "@/components/profile/recent-performance";
 import StatsGrid from "@/components/profile/stats-grid";
 import XPProgress from "@/components/profile/xp-progress";
 
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+
 const ProfilePage = async () => {
   const { data } = await getProfileData();
 
