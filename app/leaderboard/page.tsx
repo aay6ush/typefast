@@ -27,7 +27,7 @@ import { Badge } from "@/components/ui/badge";
 import { LeaderboardDataType } from "@/types";
 import axios from "axios";
 import Link from "next/link";
-import { cn, getMedalColor } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { modes } from "@/constants";
 
 const Leaderboard = () => {
@@ -86,8 +86,6 @@ const Leaderboard = () => {
       clearInterval(fetchInterval);
     };
   }, [isAllTime, selectedMode, fetchLeaderboard]);
-
-  console.log(leaderboardData);
 
   const filteredData = leaderboardData.filter((entry) =>
     entry?.name?.toLowerCase().includes(searchTerm?.toLowerCase())
@@ -276,6 +274,19 @@ const Leaderboard = () => {
       </motion.div>
     </motion.div>
   );
+};
+
+const getMedalColor = (rank: number) => {
+  switch (rank) {
+    case 1:
+      return "text-yellow-400";
+    case 2:
+      return "text-gray-400";
+    case 3:
+      return "text-amber-600";
+    default:
+      return "text-gray-400";
+  }
 };
 
 export default Leaderboard;

@@ -104,19 +104,6 @@ export const getAllTimeBestScores = (tests: Test[]) => {
   return bestScores;
 };
 
-export const getMedalColor = (rank: number) => {
-  switch (rank) {
-    case 1:
-      return "text-yellow-400";
-    case 2:
-      return "text-gray-400";
-    case 3:
-      return "text-amber-600";
-    default:
-      return "text-gray-400";
-  }
-};
-
 export const generateVerificationToken = async (email: string) => {
   const token = uuidv4();
   const expires = new Date(new Date().getTime() + 3600 * 1000);
