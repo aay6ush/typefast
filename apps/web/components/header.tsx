@@ -55,7 +55,7 @@ export const Header = () => {
                   variant="ghost"
                   size="icon"
                   onClick={() => signOut()}
-                  className="hover:bg-red-500 transition-colors duration-300"
+                  className="hover:bg-red-600 hover:text-white transition-colors duration-300"
                 >
                   <LogOut className="!size-6" />
                 </Button>

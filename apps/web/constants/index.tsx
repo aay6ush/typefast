@@ -1,12 +1,11 @@
 import {
   Award,
-  BarChart2,
+  ChartNoAxesCombined,
   Clock,
   Crown,
   Keyboard,
   Swords,
   User,
-  Users,
   Zap,
 } from "lucide-react";
 
@@ -31,54 +30,59 @@ export const FEATURES = [
     description: "Get instant feedback of your typing speed, and accuracy.",
   },
   {
-    icon: <Users className="size-10 text-emerald-500" />,
+    icon: <Swords className="size-10 text-emerald-500" />,
     title: "Challenge Friends",
     description: "Compete with friends in real-time typing races.",
   },
   {
-    icon: <BarChart2 className="size-10 text-emerald-500" />,
+    icon: <ChartNoAxesCombined className="size-10 text-emerald-500" />,
     title: "Detailed Analytics",
-    description: "Track your progress over time with comprehensive statistics.",
+    description: "Track progress over time with comprehensive stats.",
   },
   {
     icon: <Clock className="size-10 text-emerald-500" />,
     title: "Customizable Practice",
-    description:
-      "Choose from various typing modes and levels to suit your needs.",
+    description: "Choose from various typing modes to suit your needs.",
   },
   {
     icon: <Award className="size-10 text-emerald-500" />,
-    title: "Achievements",
-    description: "Earn badges and rewards as you improve your typing skills.",
+    title: "Achievements & Badges",
+    description: "Earn badges as you improve your typing speed.",
   },
   {
     icon: <Zap className="size-10 text-emerald-500" />,
-    title: "Sleek Interface",
-    description: "Enjoy a minimalist design that enhances your focus.",
+    title: "Minimalist Interface",
+    description: "Enjoy a sleek design that enhances your focus.",
   },
 ];
 
-export const DEFAULT_STATS = [
+export const STATISTICS = [
   { number: 1260, label: "Keystrokes Typed", suffix: "+" },
   { number: 50, label: "Users Registered", suffix: "+" },
   { number: 234, label: "Tests Completed", suffix: "+" },
 ];
 
-export const DEFAULT_TESTIMONIALS = [
+export const TESTIMONIALS = [
   {
-    quote:
+    name: "Sarah L.",
+    username: "sarah_l",
+    image: "",
+    tweet:
       "TypeFast has dramatically improved my typing speed. I've gone from 40 WPM to over 80 WPM in just a month!",
-    author: "Sarah L.",
   },
   {
-    quote:
+    name: "Michael R.",
+    username: "michael_r",
+    image: "",
+    tweet:
       "The real-time feedback and analytics have been crucial in identifying and correcting my typing mistakes.",
-    author: "Michael R.",
   },
   {
-    quote:
+    name: "Emily T.",
+    username: "emily_t",
+    image: "",
+    tweet:
       "Challenging friends has made practicing typing so much more fun and engaging. I look forward to it every day!",
-    author: "Emily T.",
   },
 ];
 

@@ -1,13 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useTransition } from "react";
 import {
   Card,
   CardContent,
   CardDescription,
+  CardTitle,
 } from "@repo/ui/components/ui/card";
 import { motion } from "framer-motion";
-import { DEFAULT_STATS } from "@/constants";
+import { Loader } from "lucide-react";
 
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -23,6 +24,19 @@ const itemVariants = {
 };
 
 const Stats = () => {
+  const [stats, setStats] = useState<null | { name: string; value: number }[]>(
+    null
+  );
+  const [isPending, startTransition] = useTransition();
+
+  useEffect(() => {
+    startTransition(async () => {
+      const response = await fetch("/api/stats");
+      const data = await response.json();
+      setStats(data);
+    });
+  }, []);
+
   return (
     <section className="py-20 relative">
       <div className="max-w-5xl mx-auto px-4 relative z-10">
@@ -37,60 +51,29 @@ const Stats = () => {
             Numbers
           </span>
         </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {DEFAULT_STATS.map((stat, index) => (
-            <StatCard
-              key={index}
-              number={stat.number}
-              label={stat.label}
-              suffix={stat.suffix}
-            />
-          ))}
+        <div className="flex justify-center gap-8">
+          {isPending ? (
+            <Loader className="animate-spin text-yellow-500 size-10" />
+          ) : (
+            stats?.map((stat, index) => (
+              <Card
+                key={index}
+                className="bg-neutral-900/50 border-neutral-800 w-full max-w-xs"
+              >
+                <CardContent className="p-5 text-center space-y-2">
+                  <CardTitle className="text-emerald-500 text-4xl">
+                    {stat.value}+
+                  </CardTitle>
+                  <CardDescription className="text-neutral-400 text-base">
+                    {stat.name}
+                  </CardDescription>
+                </CardContent>
+              </Card>
+            ))
+          )}
         </div>
       </div>
     </section>
-  );
-};
-
-const StatCard = ({
-  number,
-  label,
-  suffix,
-}: {
-  number: number;
-  label: string;
-  suffix?: string;
-}) => {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    const duration = 2000;
-    const steps = 60;
-    const increment = number / steps;
-    let current = 0;
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= number) {
-        clearInterval(timer);
-        setCount(number);
-      } else {
-        setCount(Math.floor(current));
-      }
-    }, duration / steps);
-
-    return () => clearInterval(timer);
-  }, [number]);
-
-  return (
-    <Card className="bg-neutral-900/50 border-neutral-800">
-      <CardContent className="pt-5 text-center">
-        <div className="text-4xl font-bold text-emerald-500 mb-2">
-          {count.toLocaleString()}
-          {suffix}
-        </div>
-        <CardDescription className="text-neutral-400">{label}</CardDescription>
-      </CardContent>
-    </Card>
   );
 };
 

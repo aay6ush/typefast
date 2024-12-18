@@ -1,9 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { Button } from "@repo/ui/components/ui/button";
+import PrimaryButton from "./button";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -52,15 +51,7 @@ const Hero = () => {
           real-time stats in a sleek, minimalist interface.
         </motion.p>
         <motion.div variants={itemVariants}>
-          <Button
-            size="lg"
-            asChild
-            className="bg-emerald-500 hover:bg-emerald-600 text-black font-semibold"
-          >
-            <Link href="/type">
-              Start Typing Now <ArrowRight className="ml-2" />
-            </Link>
-          </Button>
+          <PrimaryButton text="Start Typing Now" icon={<ArrowRight />} />
         </motion.div>
       </motion.div>
     </section>

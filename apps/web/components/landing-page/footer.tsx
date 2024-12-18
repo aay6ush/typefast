@@ -10,28 +10,21 @@ const Footer = () => {
               TypeFast
             </Link>
             <p className="text-sm text-neutral-400 mt-2">
-              © 2023 TypeFast. All rights reserved.
+              &copy; {new Date().getFullYear()} TypeFast. All rights reserved.
             </p>
           </div>
           <nav className="flex space-x-4">
-            <Link
-              href="#"
-              className="text-sm text-neutral-400 hover:text-emerald-500 transition-colors"
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              href="#"
-              className="text-sm text-neutral-400 hover:text-emerald-500 transition-colors"
-            >
-              Terms of Service
-            </Link>
-            <Link
-              href="#"
-              className="text-sm text-neutral-400 hover:text-emerald-500 transition-colors"
-            >
-              Contact Us
-            </Link>
+            {["Privacy Policy", "Terms of Service", "Contact Us"].map(
+              (link) => (
+                <Link
+                  key={link}
+                  href="#"
+                  className="text-sm text-neutral-400 hover:text-emerald-500 transition-colors"
+                >
+                  {link}
+                </Link>
+              )
+            )}
           </nav>
         </div>
       </div>

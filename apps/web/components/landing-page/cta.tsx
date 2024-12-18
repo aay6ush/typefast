@@ -1,9 +1,8 @@
 "use client";
 
-import { Button } from "@repo/ui/components/ui/button";
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import PrimaryButton from "./button";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -55,15 +54,10 @@ const CTA = () => {
           accuracy with TypeFast.
         </motion.p>
         <motion.div variants={itemVariants}>
-          <Button
-            size="lg"
-            asChild
-            className="bg-emerald-500 hover:bg-emerald-600 text-black font-semibold"
-          >
-            <Link href="/type">
-              Get Started for Free <ArrowRight className="ml-2" />
-            </Link>
-          </Button>
+          <PrimaryButton
+            text="Get Started for Free"
+            icon={<ArrowRight className="ml-2" />}
+          />
         </motion.div>
       </motion.div>
     </section>

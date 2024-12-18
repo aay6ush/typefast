@@ -73,13 +73,13 @@ const FeatureCard = ({ icon, title, description }: FeatureCardProps) => {
     <motion.div variants={itemVariants}>
       <Card className="bg-neutral-900/50 border-neutral-800 h-full">
         <CardHeader>
-          <CardTitle className="flex items-center space-x-4 text-neutral-200">
+          <CardTitle className="flex items-center space-x-4 text-neutral-200 text-2xl">
             {icon}
             <span>{title}</span>
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <CardDescription className="text-neutral-400">
+          <CardDescription className="text-neutral-400 text-base">
             {description}
           </CardDescription>
         </CardContent>

@@ -81,8 +81,15 @@ export type FeatureCardProps = {
 };
 
 export type TestimonialCardProps = {
-  quote: string;
-  author: string;
+  name: string;
+  username: string;
+  image: string;
+  tweet: string;
+};
+
+export type PrimaryButtonProps = {
+  text: string;
+  icon: ReactNode;
 };
 
 export type LeaderboardDataType = {
