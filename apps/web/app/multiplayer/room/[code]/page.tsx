@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, useCallback, use } from "react";
-import axios from "axios";
 import { useSession } from "next-auth/react";
 import { Room as RoomType } from "@prisma/client";
 import useWsStore from "@/store/useWsStore";
@@ -73,8 +72,9 @@ const RoomPage = (props: { params: Promise<{ code: string }> }) => {
 
   useEffect(() => {
     const getRoomData = async () => {
-      const response = await axios.get(`/api/room/${code}`);
-      setRoomData(response.data);
+      const response = await fetch(`/api/room/${code}`);
+      const data = await response.json();
+      setRoomData(data);
     };
 
     if (code) {

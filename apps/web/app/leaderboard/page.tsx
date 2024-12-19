@@ -36,7 +36,6 @@ import { Medal } from "lucide-react";
 import { ScrollArea } from "@repo/ui/components/ui/scroll-area";
 import { Badge } from "@repo/ui/components/ui/badge";
 import { LeaderboardDataType } from "@/types";
-import axios from "axios";
 import Link from "next/link";
 import { modes } from "@/constants";
 
@@ -57,7 +56,7 @@ const Leaderboard = () => {
       setError(null);
       setCountdown(30);
       const timeFrame = isAllTime ? "alltime" : "daily";
-      const { data } = await axios.get(
+      const response = await fetch(
         `/api/leaderboard?mode=${selectedMode}&timeFrame=${timeFrame}&limit=10`,
         {
           headers: {
@@ -65,6 +64,7 @@ const Leaderboard = () => {
           },
         }
       );
+      const data = await response.json();
 
       if (Array.isArray(data.leaderboard)) {
         setLeaderboardData(data.leaderboard);

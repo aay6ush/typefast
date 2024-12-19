@@ -30,7 +30,6 @@ import {
 import { ResultProps, StatCardProps } from "@/types";
 import { useEffect } from "react";
 import { addTest } from "@/actions/test";
-import axios from "axios";
 import StatCard from "../profile/stat-card";
 
 const Result = ({
@@ -61,11 +60,17 @@ const Result = ({
     const addToLeaderboard = async () => {
       try {
         if (!wpm || !accuracy || !time || !mode || !modeOption) return;
-        await axios.post(`/api/leaderboard`, {
-          wpm,
-          accuracy: parseFloat(accuracy.toFixed(2)),
-          time,
-          mode,
+        await fetch("/api/leaderboard", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            wpm,
+            accuracy: parseFloat(accuracy.toFixed(2)),
+            time,
+            mode,
+          }),
         });
       } catch (error) {
         console.error("Failed to add to leaderboard:", error);

@@ -4,7 +4,6 @@ import { Loader2, Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { Button } from "@repo/ui/components/ui/button";
 import {
   Card,
@@ -51,8 +50,14 @@ const CreateRoom = () => {
   const onSubmit = (data: RoomValues) => {
     startTransition(async () => {
       try {
-        const response = await axios.post("/api/room", data);
-        const room = response.data;
+        const response = await fetch("/api/room", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+        const room = await response.json();
         router.push(`/multiplayer/room/${room.code}`);
         toast.success("Room created successfully!");
       } catch (error) {
