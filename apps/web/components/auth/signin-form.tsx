@@ -82,11 +82,11 @@ const SignInForm = () => {
                 <FormLabel className="text-neutral-200">Email</FormLabel>
                 <FormControl>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                    <Mail className="absolute left-3 top-2 h-5 w-5 text-neutral-400" />
                     <Input
-                      placeholder="name@example.com"
+                      placeholder="john@gmail.com"
                       {...field}
-                      className="pl-10"
+                      className="pl-10 bg-neutral-800 border-neutral-700 text-neutral-200 placeholder-neutral-400"
                     />
                   </div>
                 </FormControl>
@@ -104,12 +104,12 @@ const SignInForm = () => {
                 <FormLabel className="text-neutral-200">Password</FormLabel>
                 <FormControl>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                    <Lock className="absolute left-3 top-2 h-5 w-5 text-neutral-400" />
                     <Input
                       type="password"
-                      placeholder="********"
+                      placeholder="●●●●●●●●"
                       {...field}
-                      className="pl-10"
+                      className="pl-10 bg-neutral-800 border-neutral-700 text-neutral-200 placeholder-neutral-400"
                     />
                   </div>
                 </FormControl>
@@ -118,11 +118,7 @@ const SignInForm = () => {
             )}
           />
         </motion.div>
-        <Button
-          className="w-full bg-neutral-800 text-neutral-300"
-          type="submit"
-          disabled={isPending}
-        >
+        <Button className="w-full" type="submit" disabled={isPending}>
           {isPending ? (
             <motion.div
               className="h-5 w-5 rounded-full border-t-2 border-r-2 border-white"
