@@ -36,7 +36,7 @@ const Testimonials = () => {
           className="text-3xl sm:text-4xl md:text-5xl text-neutral-200 font-bold text-center mb-12"
         >
           What Our{" "}
-          <span className="underline underline-offset-8 decoration-emerald-500">
+          <span className="underline underline-offset-8 decoration-emerald-400">
             Users
           </span>{" "}
           Say
@@ -94,7 +94,7 @@ export const TestimonialCard = ({
             </Avatar>
             <div className="flex gap-x-1 items-center">
               <span className="font-bold text-neutral-200">{name}</span>
-              <BadgeCheck className="text-emerald-500 size-5" />
+              <BadgeCheck className="text-emerald-400 size-5" />
             </div>
             <span className="text-neutral-500">@{username}</span>
           </div>

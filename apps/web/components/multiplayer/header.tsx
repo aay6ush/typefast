@@ -1,15 +1,13 @@
 import { useCallback, useState } from "react";
 import { motion } from "framer-motion";
 import {
-  Users,
-  Lock,
-  Globe,
   Copy,
   LogOut,
   Hash,
-  Signal,
   PlayCircle,
   Settings,
+  Type,
+  Hourglass,
 } from "lucide-react";
 import { Button } from "@repo/ui/components/ui/button";
 import { Dialog, DialogTrigger } from "@repo/ui/components/ui/dialog";
@@ -83,60 +81,44 @@ const Header = ({
       className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 pt-8 pb-4 border-b border-neutral-800"
     >
       <div className="space-y-2">
-        <h1 className="text-3xl font-bold flex items-center gap-x-3 text-neutral-200">
-          {roomData.isPublic ? (
-            <Globe
-              className="size-8 text-violet-400"
-              aria-label="Public Room"
-            />
+        <h1 className="text-3xl font-bold text-neutral-200 flex items-center gap-x-3">
+          {roomData.name} |{" "}
+          {roomData.mode === "words" ? (
+            <>
+              <Type strokeWidth="3" className="size-7" />
+              {roomData.modeOption} words
+            </>
           ) : (
-            <Lock
-              className="size-8 text-violet-400"
-              aria-label="Private Room"
-            />
+            <>
+              <Hourglass strokeWidth="3" className="size-7" />
+              {roomData.modeOption} seconds
+            </>
           )}
-          {roomData.name}
         </h1>
-        <div className="flex items-center gap-4 text-sm text-neutral-400">
+        <div className="flex items-center gap-4 text-neutral-400">
           <div className="flex items-center gap-2">
-            <Hash className="w-4 h-4" />
+            <Hash className="size-5" />
             <span>Room Code: {roomData.code}</span>
             <Button
               variant="ghost"
               size="icon"
-              className="h-6 w-6 text-neutral-400 hover:text-violet-400"
+              className="text-neutral-400 hover:text-violet-400"
               onClick={handleCopyInvite}
               aria-label="Copy invite link"
             >
-              <Copy className="h-4 w-4" />
+              <Copy className="size-5" />
             </Button>
-          </div>
-          <div className="flex items-center gap-2">
-            <Users className="w-4 h-4" />
-            <span>{roomData.maxPlayers} Players</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Signal className="w-4 h-4" />
-            <span>
-              {roomData.mode === "words"
-                ? `${roomData.modeOption} words`
-                : `${roomData.modeOption} min`}
-            </span>
           </div>
         </div>
       </div>
       <div className="flex gap-3 w-full lg:w-auto">
-        <Button
-          className="flex-1 lg:flex-none bg-gradient-to-r from-emerald-500 to-emerald-700 hover:from-emerald-600 hover:to-emerald-800"
-          onClick={handleStartTest}
-          disabled={!isHost || isRaceActive}
-        >
-          <PlayCircle className="w-5 h-5 mr-2" />
+        <Button onClick={handleStartTest} disabled={!isHost || isRaceActive}>
+          <PlayCircle />
           {countdown !== null
             ? `Starting in ${countdown}s`
             : isRaceActive
               ? "Race in Progress"
-              : "Start Test"}
+              : "Start Race"}
         </Button>
         <RoomSettings
           isSettingsOpen={isSettingsOpen}
@@ -157,11 +139,7 @@ const RoomSettings = ({
   return (
     <Dialog open={isSettingsOpen} onOpenChange={setIsSettingsOpen}>
       <DialogTrigger asChild>
-        <Button
-          size="icon"
-          className="bg-neutral-800 border-neutral-700 hover:bg-neutral-700"
-          aria-label="Room settings"
-        >
+        <Button size="icon" variant="secondary">
           <Settings className="!size-5" />
         </Button>
       </DialogTrigger>

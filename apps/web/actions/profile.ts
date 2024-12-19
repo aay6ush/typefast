@@ -3,9 +3,7 @@
 import { auth } from "@/auth";
 import prisma from "@repo/db/client";
 import { getUserByEmail } from "@/db/user";
-import { Trophy, Target, Crown } from "lucide-react";
 import {
-  calculateLevelAndXP,
   calculateTotalTypingTime,
   getAllTimeBestScores,
   getRecentTests,
@@ -42,36 +40,10 @@ export const getProfileData = async () => {
         )
       : 0;
 
-    const { level, xp, xpToNextLevel } = calculateLevelAndXP(testsCompleted);
-
-    const achievements = [
-      {
-        icon: Trophy,
-        title: "Speed Demon",
-        description: "Reach 100 WPM",
-        achieved: averageWpm >= 100,
-      },
-      {
-        icon: Target,
-        title: "Perfectionist",
-        description: "100% Accuracy",
-        achieved: averageAccuracy === 100,
-      },
-      {
-        icon: Crown,
-        title: "Veteran",
-        description: "Complete 1000 tests",
-        achieved: testsCompleted >= 1000,
-      },
-    ];
-
     return {
       data: {
         name: user.name || "TypeMaster",
         image: user.image || "/placeholder.svg",
-        level,
-        xp,
-        xpToNextLevel,
         stats: {
           averageWpm,
           averageAccuracy,
@@ -80,7 +52,6 @@ export const getProfileData = async () => {
         },
         allTimeBestScores: getAllTimeBestScores(tests),
         recentTests: getRecentTests(tests),
-        achievements: achievements.filter((a) => a.achieved),
       },
     };
   } catch (err) {

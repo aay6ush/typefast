@@ -1,6 +1,6 @@
-import { BarChart3, Clock, Target, Zap } from "lucide-react";
-import StatCard from "./stat-card";
+import { Activity, BarChart3, Clock, Target } from "lucide-react";
 import { StatsGridProps } from "@/types";
+import StatCard from "./stat-card";
 
 const StatsGrid = ({ stats }: StatsGridProps) => {
   const { averageWpm, averageAccuracy, testsCompleted, totalTimeTyping } =
@@ -9,28 +9,24 @@ const StatsGrid = ({ stats }: StatsGridProps) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
       <StatCard
-        icon={<Zap className="w-5 h-5" />}
+        icon={<Activity className="size-8 mr-2 text-sky-400" />}
         title="Average WPM"
         value={averageWpm}
-        color="text-emerald-400"
       />
       <StatCard
-        icon={<Target className="w-5 h-5" />}
+        icon={<Target className="size-8 mr-2 text-emerald-400" />}
         title="Accuracy"
         value={`${averageAccuracy}%`}
-        color="text-sky-400"
       />
       <StatCard
-        icon={<BarChart3 className="w-5 h-5" />}
+        icon={<BarChart3 className="size-8 mr-2 text-amber-400" />}
         title="Tests Completed"
         value={testsCompleted}
-        color="text-violet-400"
       />
       <StatCard
-        icon={<Clock className="w-5 h-5" />}
+        icon={<Clock className="size-8 mr-2 text-violet-400" />}
         title="Time Typing"
         value={totalTimeTyping}
-        color="text-amber-400"
       />
     </div>
   );

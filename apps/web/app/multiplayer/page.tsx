@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useTransition } from "react";
 import { motion } from "framer-motion";
-import { Signal, Globe, Hash, List, Loader } from "lucide-react";
+import { Globe, Hash, LoaderPinwheel } from "lucide-react";
 import CreateRoom from "@/components/multiplayer/create-room";
 import JoinRoom from "@/components/multiplayer/join-room";
 import PublicRooms from "@/components/multiplayer/public-rooms";
@@ -84,15 +84,12 @@ const MultiplayerPage = () => {
           <h1 className="text-3xl font-bold mb-4 sm:mb-0">Multiplayer Arena</h1>
           <div className="flex items-center space-x-6">
             <div className="flex items-center text-emerald-400">
-              <Globe className="w-5 h-5 mr-2" />
+              <Globe className="size-5 mr-2" />
               <span className="font-semibold">{onlinePlayers} online</span>
             </div>
-            <div className="flex items-center text-sky-400">
-              <Signal className="w-5 h-5 mr-2" />
-              <span className="font-semibold">{ping} ms</span>
-            </div>
+
             <div className="flex items-center text-violet-400">
-              <Hash className="w-5 h-5 mr-2" />
+              <Hash className="size-5 mr-2" />
               <span className="font-semibold">{rooms.length} rooms</span>
             </div>
           </div>
@@ -110,14 +107,14 @@ const MultiplayerPage = () => {
         <motion.div variants={itemVariants}>
           <Card className="bg-neutral-900/50 border-neutral-800 text-neutral-200">
             <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <List className="w-6 h-6 text-violet-400" />
-                <span>Public Rooms</span>
+              <CardTitle className="flex items-center space-x-3 text-2xl">
+                <Hash className="size-8 text-violet-400" />
+                <span>Public Room</span>
               </CardTitle>
             </CardHeader>
             <CardContent>
               {isPending ? (
-                <Loader className="animate-spin mx-auto size-10 text-yellow-400" />
+                <LoaderPinwheel className="animate-spin mx-auto size-10 text-yellow-400" />
               ) : (
                 <PublicRooms rooms={rooms} />
               )}

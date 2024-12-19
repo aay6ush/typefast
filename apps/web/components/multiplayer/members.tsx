@@ -19,9 +19,9 @@ const Members = ({ members }: MembersProps) => {
   return (
     <Card className="bg-neutral-900/50 border-neutral-800">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-neutral-200">
-          <Users className="w-6 h-6 text-sky-400" />
-          Members ({members.length})
+        <CardTitle className="flex items-center gap-x-3 text-neutral-200 text-2xl">
+          <Users className="size-8 text-sky-400" />
+          Typists ({members.length})
         </CardTitle>
       </CardHeader>
       <CardContent>

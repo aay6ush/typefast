@@ -30,8 +30,6 @@ export type AddTestTypes = Omit<ResultProps, "onRestart" | "wpmData">;
 export type ProfileHeaderProps = {
   image: string;
   name: string;
-  level: number;
-  xp: number;
 };
 
 export type XPProgressProps = {
@@ -89,7 +87,10 @@ export type TestimonialCardProps = {
 
 export type PrimaryButtonProps = {
   text: string;
-  icon: ReactNode;
+  icon: ForwardRefExoticComponent<
+    Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
+  >;
+  iconPosition: "left" | "right";
 };
 
 export type LeaderboardDataType = {

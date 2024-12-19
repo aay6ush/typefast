@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@repo/ui/components/ui/card";
-import { TrendingUp, ChevronDown } from "lucide-react";
+import { TrendingUp, ChevronDown, ChartNoAxesCombined } from "lucide-react";
 import { Button } from "@repo/ui/components/ui/button";
 import {
   BarChart,
@@ -38,30 +38,42 @@ const RecentPerformance = ({ recentTests }: RecentPerformanceProps) => {
     <Card className="bg-neutral-900/50 border-neutral-800">
       <CardHeader>
         <CardTitle className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <TrendingUp className="w-5 h-5 text-emerald-500" />
+          <div className="flex items-center space-x-3 text-2xl">
+            <ChartNoAxesCombined className="size-8 text-yellow-400" />
             <span className="text-neutral-200">Recent Performance</span>
           </div>
           <div className="flex space-x-2">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="sm">
+                <Button
+                  variant="outline"
+                  className="bg-neutral-800 border-neutral-700 text-neutral-200"
+                >
                   {chartType === "bar" ? "Bar Chart" : "Line Chart"}
                   <ChevronDown className="ml-2 h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem onClick={() => setChartType("bar")}>
+              <DropdownMenuContent className="bg-neutral-800 border-neutral-700">
+                <DropdownMenuItem
+                  className="text-neutral-400 min-w-full cursor-pointer"
+                  onClick={() => setChartType("bar")}
+                >
                   Bar Chart
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setChartType("line")}>
+                <DropdownMenuItem
+                  className="text-neutral-400 min-w-full cursor-pointer"
+                  onClick={() => setChartType("line")}
+                >
                   Line Chart
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="sm">
+                <Button
+                  variant="outline"
+                  className="bg-neutral-800 border-neutral-700 text-neutral-200"
+                >
                   {timeRange === "week"
                     ? "Last Week"
                     : timeRange === "month"
@@ -70,14 +82,23 @@ const RecentPerformance = ({ recentTests }: RecentPerformanceProps) => {
                   <ChevronDown className="ml-2 h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem onClick={() => setTimeRange("week")}>
+              <DropdownMenuContent className="bg-neutral-800 border-neutral-700">
+                <DropdownMenuItem
+                  className="text-neutral-400 min-w-full cursor-pointer"
+                  onClick={() => setTimeRange("week")}
+                >
                   Last Week
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTimeRange("month")}>
+                <DropdownMenuItem
+                  className="text-neutral-400 min-w-full cursor-pointer"
+                  onClick={() => setTimeRange("month")}
+                >
                   Last Month
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTimeRange("3months")}>
+                <DropdownMenuItem
+                  className="text-neutral-400 min-w-full cursor-pointer"
+                  onClick={() => setTimeRange("3months")}
+                >
                   Last 3 Months
                 </DropdownMenuItem>
               </DropdownMenuContent>

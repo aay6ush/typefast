@@ -23,9 +23,9 @@ export const Header = () => {
         href="/"
         className="text-2xl font-bold text-neutral-200 flex items-center space-x-1"
       >
-        <Zap className="size-7 text-emerald-500" />
+        <Zap className="size-6 text-emerald-400" />
         <p>
-          Type<span className="text-emerald-500">Fast</span>
+          Type<span className="text-emerald-400">Fast</span>
         </p>
       </Link>
       <nav className="flex space-x-1.5 items-center">
@@ -55,7 +55,7 @@ export const Header = () => {
                   variant="ghost"
                   size="icon"
                   onClick={() => signOut()}
-                  className="hover:bg-red-600 hover:text-white transition-colors duration-300"
+                  className="hover:bg-red-500 hover:text-white transition-colors duration-300"
                 >
                   <LogOut className="!size-6" />
                 </Button>

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Send, MessageSquare } from "lucide-react";
+import { Send, MessagesSquare } from "lucide-react";
 import { Button } from "@repo/ui/components/ui/button";
 import {
   Card,
@@ -83,8 +83,8 @@ const Chat = ({ code }: ChatProps) => {
   return (
     <Card className="lg:col-span-2 bg-neutral-900/50 border-neutral-800">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-neutral-200">
-          <MessageSquare className="w-6 h-6 text-emerald-400" />
+        <CardTitle className="flex items-center gap-x-3 text-neutral-200 text-2xl">
+          <MessagesSquare className="size-8 text-emerald-400" />
           Chat
         </CardTitle>
       </CardHeader>
@@ -104,13 +104,8 @@ const Chat = ({ code }: ChatProps) => {
               placeholder="Type a message..."
               className="bg-neutral-800 border-neutral-700 text-neutral-200"
             />
-            <Button
-              type="submit"
-              size="icon"
-              disabled={!inputMessage.trim()}
-              className="bg-emerald-500 hover:bg-emerald-600"
-            >
-              <Send className="w-4 h-4" />
+            <Button type="submit" size="icon" disabled={!inputMessage.trim()}>
+              <Send />
             </Button>
           </form>
         </div>

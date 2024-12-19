@@ -9,7 +9,15 @@ import {
 } from "@repo/ui/components/ui/card";
 import { Button, buttonVariants } from "@repo/ui/components/ui/button";
 import { ChartContainer, ChartTooltip } from "@repo/ui/components/ui/chart";
-import { Activity, Target, Clock, RotateCcw, TrendingUp } from "lucide-react";
+import {
+  Activity,
+  Target,
+  Clock,
+  RotateCcw,
+  TrendingUp,
+  ChartNoAxesCombined,
+  Hourglass,
+} from "lucide-react";
 import {
   LineChart,
   Line,
@@ -23,6 +31,7 @@ import { ResultProps, StatCardProps } from "@/types";
 import { useEffect } from "react";
 import { addTest } from "@/actions/test";
 import axios from "axios";
+import StatCard from "../profile/stat-card";
 
 const Result = ({
   wpm,
@@ -98,30 +107,27 @@ const Result = ({
         className="grid grid-cols-1 sm:grid-cols-3 gap-6"
       >
         <StatCard
-          icon={<Activity className="w-6 h-6" />}
+          icon={<Activity className="size-8 mr-2 text-sky-400" />}
           title="WPM"
           value={wpm}
-          color="text-emerald-400"
         />
         <StatCard
-          icon={<Target className="w-6 h-6" />}
+          icon={<Target className="size-8 mr-2 text-emerald-400" />}
           title="Accuracy"
           value={`${accuracy.toFixed(2)}%`}
-          color="text-sky-400"
         />
         <StatCard
-          icon={<Clock className="w-6 h-6" />}
+          icon={<Hourglass className="size-8 mr-2 text-violet-400" />}
           title="Time"
           value={`${time}s`}
-          color="text-violet-400"
         />
       </motion.div>
 
       <motion.div variants={itemVariants}>
         <Card className="bg-neutral-900/50 border-neutral-800 shadow-lg">
           <CardHeader className="pb-2">
-            <CardTitle className="text-xl font-semibold flex items-center space-x-2 text-gray-100">
-              <TrendingUp className="w-5 h-5" />
+            <CardTitle className="text-2xl flex items-center space-x-3 text-neutral-200">
+              <ChartNoAxesCombined className="size-8 text-yellow-400" />
               <span>Performance Analysis</span>
             </CardTitle>
           </CardHeader>
@@ -225,30 +231,12 @@ const Result = ({
       </motion.div>
 
       <motion.div variants={itemVariants} className="flex justify-center">
-        <Button
-          onClick={onRestart}
-          className="flex items-center justify-center space-x-2"
-          size="lg"
-        >
-          <RotateCcw className="w-5 h-5 mr-2" />
-          <span>Try Again</span>
+        <Button size="lg" onClick={onRestart}>
+          <RotateCcw />
+          Type Again
         </Button>
       </motion.div>
     </motion.div>
-  );
-};
-
-const StatCard = ({ icon, title, value, color }: StatCardProps) => {
-  return (
-    <Card className="bg-neutral-900/50 border-neutral-800 shadow-md transition-all duration-300 hover:shadow-lg">
-      <CardContent className="flex items-center p-6">
-        <div className={`mr-4 ${color}`}>{icon}</div>
-        <div>
-          <p className="text-sm font-medium text-gray-400 uppercase">{title}</p>
-          <p className="text-3xl font-bold text-gray-100">{value}</p>
-        </div>
-      </CardContent>
-    </Card>
   );
 };
 

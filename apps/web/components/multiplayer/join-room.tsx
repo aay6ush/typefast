@@ -57,8 +57,8 @@ const JoinRoom = () => {
   return (
     <Card className="bg-neutral-900/50 border-neutral-800 text-neutral-200">
       <CardHeader>
-        <CardTitle className="flex items-center space-x-2">
-          <LogIn className="w-6 h-6 text-sky-400" />
+        <CardTitle className="flex items-center space-x-3 text-2xl">
+          <LogIn className="size-8 text-sky-400" />
           <span>Join Room</span>
         </CardTitle>
       </CardHeader>
@@ -74,7 +74,7 @@ const JoinRoom = () => {
                     <Input
                       {...field}
                       placeholder="Room Code"
-                      className="bg-neutral-700/50 border-neutral-600 text-gray-100 placeholder-gray-400"
+                      className="bg-neutral-800 border-neutral-700 text-neutral-200 placeholder-neutral-400"
                     />
                   </FormControl>
                   <FormMessage />
@@ -83,17 +83,19 @@ const JoinRoom = () => {
             />
             <Button
               type="submit"
-              className="w-full bg-gradient-to-r from-sky-500 to-sky-700 hover:from-sky-600 hover:to-sky-800 text-white font-semibold py-2 px-4 rounded-md transition-all duration-300"
+              size="lg"
+              variant="secondary"
+              className="w-full"
               disabled={isPending}
             >
               {isPending ? (
                 <>
-                  <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                  <Loader2 className="animate-spin" />
                   <span>Joining...</span>
                 </>
               ) : (
                 <>
-                  <LogIn className="w-5 h-5 mr-2" />
+                  <LogIn />
                   <span>Join Room</span>
                 </>
               )}

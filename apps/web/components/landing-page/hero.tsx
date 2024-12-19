@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import PrimaryButton from "./button";
+import { Button } from "@repo/ui/components/ui/button";
+import Link from "next/link";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -41,7 +42,7 @@ const Hero = () => {
           className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-none text-neutral-200"
         >
           Master Your Typing Skills <br />
-          with <span className="text-emerald-500">TypeFast</span>
+          with <span className="text-emerald-400">TypeFast</span>
         </motion.h1>
         <motion.p
           variants={itemVariants}
@@ -51,7 +52,12 @@ const Hero = () => {
           real-time stats in a sleek, minimalist interface.
         </motion.p>
         <motion.div variants={itemVariants}>
-          <PrimaryButton text="Start Typing Now" icon={<ArrowRight />} />
+          <Button size="lg" asChild>
+            <Link href="/type">
+              Start Typing Now
+              <ArrowRight />
+            </Link>
+          </Button>
         </motion.div>
       </motion.div>
     </section>

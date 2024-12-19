@@ -37,21 +37,11 @@ export const calculateAccuracy = (userInput: string, text: string) => {
   return accuracy;
 };
 
-export const calculateLevelAndXP = (testsCompleted: number) => {
-  const xp = testsCompleted * XP_PER_TEST;
-
-  const level = Math.floor(xp / 1000) + 1;
-  const xpToNextLevel = level * 1000 - xp;
-
-  return { level, xp, xpToNextLevel };
-};
-
 export const calculateTotalTypingTime = (tests: Test[]): string => {
   const totalSeconds = tests.reduce((sum, test) => sum + test.time, 0);
   const hours = Math.floor(totalSeconds / 3600);
   const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = totalSeconds % 60;
-  return `${hours}h ${minutes}m ${seconds}s`;
+  return `${hours}h ${minutes}m`;
 };
 
 // TODO: check this function

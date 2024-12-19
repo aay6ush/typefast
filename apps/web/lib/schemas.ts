@@ -19,21 +19,12 @@ export const roomSchema = z.object({
   name: z.string().min(3, {
     message: "Room name must be at least 3 characters.",
   }),
-  maxPlayers: z
-    .number()
-    .min(2, {
-      message: "Room must have at least 2 players.",
-    })
-    .max(10, {
-      message: "Room cannot have more than 10 players.",
-    }),
   mode: z.string().min(1, {
     message: "Please select a mode.",
   }),
   modeOption: z.string().min(1, {
     message: "Please select a mode option.",
   }),
-  isPublic: z.boolean().default(true),
 });
 
 export const joinRoomSchema = z.object({

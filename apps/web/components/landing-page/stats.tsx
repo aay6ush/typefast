@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@repo/ui/components/ui/card";
 import { motion } from "framer-motion";
-import { Loader } from "lucide-react";
+import { LoaderPinwheel } from "lucide-react";
 
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -47,13 +47,13 @@ const Stats = () => {
           className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-neutral-200 mb-12"
         >
           TypeFast by{" "}
-          <span className="underline underline-offset-8 decoration-emerald-500">
+          <span className="underline underline-offset-8 decoration-emerald-400">
             Numbers
           </span>
         </motion.h2>
         <div className="flex justify-center gap-8">
           {isPending ? (
-            <Loader className="animate-spin text-yellow-500 size-10" />
+            <LoaderPinwheel className="animate-spin mx-auto size-10 text-yellow-400" />
           ) : (
             stats?.map((stat, index) => (
               <Card
@@ -61,7 +61,7 @@ const Stats = () => {
                 className="bg-neutral-900/50 border-neutral-800 w-full max-w-xs"
               >
                 <CardContent className="p-5 text-center space-y-2">
-                  <CardTitle className="text-emerald-500 text-4xl">
+                  <CardTitle className="text-emerald-400 text-4xl">
                     {stat.value}+
                   </CardTitle>
                   <CardDescription className="text-neutral-400 text-base">

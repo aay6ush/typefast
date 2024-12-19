@@ -41,10 +41,8 @@ const CreateRoom = () => {
     resolver: zodResolver(roomSchema),
     defaultValues: {
       name: "",
-      maxPlayers: 5,
       mode: "",
       modeOption: "",
-      isPublic: true,
     },
   });
 
@@ -67,8 +65,8 @@ const CreateRoom = () => {
   return (
     <Card className="bg-neutral-900/50 border-neutral-800 text-neutral-200">
       <CardHeader>
-        <CardTitle className="flex items-center space-x-2">
-          <Plus className="w-6 h-6 text-emerald-400" />
+        <CardTitle className="flex items-center space-x-3 text-2xl">
+          <Plus className="size-8 text-emerald-400" />
           <span>Create Room</span>
         </CardTitle>
       </CardHeader>
@@ -84,7 +82,7 @@ const CreateRoom = () => {
                     <Input
                       {...field}
                       placeholder="Room Name"
-                      className="bg-neutral-700/50 border-neutral-600 text-gray-100 placeholder-gray-400"
+                      className="bg-neutral-800 border-neutral-700 text-neutral-200 placeholder-neutral-400"
                     />
                   </FormControl>
                   <FormMessage />
@@ -172,57 +170,21 @@ const CreateRoom = () => {
               />
             </div>
 
-            <FormField
-              control={form.control}
-              name="maxPlayers"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      type="number"
-                      placeholder="Max Players"
-                      className="bg-neutral-700/50 border-neutral-600 text-gray-100 placeholder-gray-400"
-                      onChange={(e) => field.onChange(Number(e.target.value))}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="isPublic"
-              render={({ field }) => (
-                <FormItem className="flex items-center justify-between rounded-lg border bg-neutral-700/50 border-neutral-600 text-gray-100 p-3 shadow-sm">
-                  <div className="space-y-0.5">
-                    <FormLabel>Public Room</FormLabel>
-                  </div>
-                  <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-
             <Button
+              size="lg"
               type="submit"
-              className="w-full bg-gradient-to-r from-emerald-500 to-emerald-700 hover:from-emerald-600 hover:to-emerald-800 text-white font-semibold py-2 px-4 rounded-md transition-all duration-300"
+              className="w-full"
               disabled={isPending}
             >
               {isPending ? (
                 <>
-                  <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                  <span>Creating...</span>
+                  <Loader2 className="animate-spin" />
+                  Creating...
                 </>
               ) : (
                 <>
-                  <Plus className="w-5 h-5 mr-2" />
-                  <span>Create Room</span>
+                  <Plus />
+                  Create Room
                 </>
               )}
             </Button>

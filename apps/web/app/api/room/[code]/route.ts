@@ -1,10 +1,9 @@
 import prisma from "@repo/db/client";
 import { NextRequest, NextResponse } from "next/server";
 
-export const GET = async (
-  request: NextRequest,
-  segmentData: { params: Promise<{ code: string }> }
-) => {
+export const GET = async (segmentData: {
+  params: Promise<{ code: string }>;
+}) => {
   try {
     const { code } = await segmentData.params;
 
@@ -14,10 +13,8 @@ export const GET = async (
         id: true,
         code: true,
         name: true,
-        maxPlayers: true,
         mode: true,
         modeOption: true,
-        isPublic: true,
       },
     });
 

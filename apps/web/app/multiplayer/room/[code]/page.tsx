@@ -11,7 +11,7 @@ import Header from "@/components/multiplayer/header";
 import Race from "@/components/multiplayer/race";
 import Chat from "@/components/multiplayer/chat";
 import Members from "@/components/multiplayer/members";
-import { Loader } from "lucide-react";
+import { LoaderPinwheel } from "lucide-react";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -182,7 +182,7 @@ const RoomPage = (props: { params: Promise<{ code: string }> }) => {
   if (status === "loading") {
     return (
       <div className="h-screen grid place-items-center">
-        <Loader className="animate-spin mx-auto size-10 text-yellow-400" />
+        <LoaderPinwheel className="animate-spin mx-auto size-10 text-yellow-400" />
       </div>
     );
   }

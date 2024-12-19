@@ -1,10 +1,10 @@
 import {
-  Award,
+  Activity,
+  Bolt,
   ChartNoAxesCombined,
-  Clock,
   Crown,
-  Keyboard,
   Swords,
+  Type,
   User,
   Zap,
 } from "lucide-react";
@@ -25,32 +25,27 @@ export const XP_PER_TEST = 10;
 
 export const FEATURES = [
   {
-    icon: <Zap className="size-10 text-emerald-500" />,
+    icon: <Activity className="size-10 text-emerald-400" />,
     title: "Real-time Feedback",
     description: "Get instant feedback of your typing speed, and accuracy.",
   },
   {
-    icon: <Swords className="size-10 text-emerald-500" />,
+    icon: <Swords className="size-10 text-sky-400" />,
     title: "Challenge Friends",
     description: "Compete with friends in real-time typing races.",
   },
   {
-    icon: <ChartNoAxesCombined className="size-10 text-emerald-500" />,
+    icon: <ChartNoAxesCombined className="size-10 text-yellow-400" />,
     title: "Detailed Analytics",
     description: "Track progress over time with comprehensive stats.",
   },
   {
-    icon: <Clock className="size-10 text-emerald-500" />,
+    icon: <Bolt className="size-10 text-violet-400" />,
     title: "Customizable Practice",
     description: "Choose from various typing modes to suit your needs.",
   },
   {
-    icon: <Award className="size-10 text-emerald-500" />,
-    title: "Achievements & Badges",
-    description: "Earn badges as you improve your typing speed.",
-  },
-  {
-    icon: <Zap className="size-10 text-emerald-500" />,
+    icon: <Zap className="size-10 text-emerald-400" />,
     title: "Minimalist Interface",
     description: "Enjoy a sleek design that enhances your focus.",
   },
@@ -91,7 +86,7 @@ export const NAVLINKS = [
     id: 1,
     name: "Type",
     href: "/type",
-    icon: Keyboard,
+    icon: Type,
   },
   {
     id: 2,

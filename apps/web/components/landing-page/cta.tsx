@@ -3,6 +3,8 @@
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import PrimaryButton from "./button";
+import { Button } from "@repo/ui/components/ui/button";
+import Link from "next/link";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -41,7 +43,7 @@ const CTA = () => {
           className="text-3xl sm:text-4xl md:text-5xl font-bold text-neutral-200 tracking-tight"
         >
           Ready to Become a{" "}
-          <span className="underline underline-offset-8 decoration-emerald-500">
+          <span className="underline underline-offset-8 decoration-emerald-400">
             Typing Pro
           </span>
           ?
@@ -54,10 +56,12 @@ const CTA = () => {
           accuracy with TypeFast.
         </motion.p>
         <motion.div variants={itemVariants}>
-          <PrimaryButton
-            text="Get Started for Free"
-            icon={<ArrowRight className="ml-2" />}
-          />
+          <Button size="lg" asChild>
+            <Link href="/type">
+              Get Started for Free
+              <ArrowRight />
+            </Link>
+          </Button>
         </motion.div>
       </motion.div>
     </section>

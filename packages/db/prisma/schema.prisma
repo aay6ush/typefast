@@ -68,13 +68,11 @@ model Test {
 }
 
 model Room {
-  id         String  @id @default(cuid())
-  code       String  @unique
+  id         String @id @default(cuid())
+  code       String @unique
   name       String
-  maxPlayers Int     @default(5)
   mode       String
   modeOption Int
-  isPublic   Boolean @default(true)
 
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)

@@ -22,7 +22,7 @@ export const POST = async (request: NextRequest) => {
       return NextResponse.json(validation.error.errors, { status: 400 });
     }
 
-    const { name, maxPlayers, mode, modeOption, isPublic } = validation.data;
+    const { name, mode, modeOption } = validation.data;
 
     const roomCode = generateRoomCode();
 
@@ -30,10 +30,8 @@ export const POST = async (request: NextRequest) => {
       data: {
         code: roomCode,
         name,
-        maxPlayers,
         mode,
         modeOption: Number(modeOption),
-        isPublic,
         userId: session?.user?.id,
       },
     });
@@ -48,15 +46,12 @@ export const POST = async (request: NextRequest) => {
 export const GET = async () => {
   try {
     const rooms = await prisma.room.findMany({
-      where: { isPublic: true },
       select: {
         id: true,
         code: true,
         name: true,
-        maxPlayers: true,
         mode: true,
         modeOption: true,
-        isPublic: true,
       },
       orderBy: { createdAt: "desc" },
     });

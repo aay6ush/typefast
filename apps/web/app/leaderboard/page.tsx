@@ -7,8 +7,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@repo/ui/components/ui/card";
-import { Button, buttonVariants } from "@repo/ui/components/ui/button";
-import { Trophy, ChevronDown, Activity } from "lucide-react";
+import { Button } from "@repo/ui/components/ui/button";
+import {
+  ChevronDown,
+  Activity,
+  LoaderPinwheel,
+  CrownIcon,
+  Hourglass,
+  ArrowRight,
+} from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 import { Input } from "@repo/ui/components/ui/input";
 import {
@@ -26,13 +33,11 @@ import {
   DropdownMenuTrigger,
 } from "@repo/ui/components/ui/dropdown-menu";
 import { Medal } from "lucide-react";
-import { Clock } from "lucide-react";
 import { ScrollArea } from "@repo/ui/components/ui/scroll-area";
 import { Badge } from "@repo/ui/components/ui/badge";
 import { LeaderboardDataType } from "@/types";
 import axios from "axios";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
 import { modes } from "@/constants";
 
 const Leaderboard = () => {
@@ -122,8 +127,8 @@ const Leaderboard = () => {
         <Card className="bg-neutral-900/50 border-neutral-800 shadow-lg">
           <CardHeader className="pb-2">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-2 sm:space-y-0">
-              <CardTitle className="text-2xl font-bold flex items-center space-x-2 text-gray-100">
-                <Trophy className="w-6 h-6 text-yellow-400" />
+              <CardTitle className="text-2xl flex items-center space-x-3 text-neutral-200">
+                <CrownIcon className="size-8 text-yellow-400" />
                 <span>Leaderboard</span>
                 <Badge variant="secondary">Updates in {countdown}s</Badge>
               </CardTitle>
@@ -152,7 +157,7 @@ const Leaderboard = () => {
                     }`}
                     onClick={() => setIsAllTime(false)}
                   >
-                    <Clock />
+                    <Hourglass />
                     Daily
                   </Button>
                 </div>
@@ -166,7 +171,7 @@ const Leaderboard = () => {
                         ? "All Modes"
                         : selectedMode.charAt(0).toUpperCase() +
                           selectedMode.slice(1)}
-                      <ChevronDown className="ml-2 h-4 w-4" />
+                      <ChevronDown />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="bg-neutral-800 border-neutral-700">
@@ -202,9 +207,7 @@ const Leaderboard = () => {
             </div>
             <div className="overflow-x-auto">
               {isLoading ? (
-                <div className="flex justify-center items-center py-8">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-sky-400"></div>
-                </div>
+                <LoaderPinwheel className="animate-spin mx-auto size-10 text-yellow-400" />
               ) : error ? (
                 <div className="text-red-400 text-center py-8">{error}</div>
               ) : (
@@ -266,16 +269,12 @@ const Leaderboard = () => {
       </motion.div>
 
       <motion.div variants={itemVariants} className="flex justify-center">
-        <Link
-          href="/type"
-          className={cn(
-            buttonVariants({ size: "lg" }),
-            "bg-emerald-600 hover:bg-emerald-700 text-white"
-          )}
-        >
-          <Clock className="w-5 h-5 mr-2" />
-          Start New Test
-        </Link>
+        <Button size="lg" asChild>
+          <Link href="/type">
+            Start New Race
+            <ArrowRight />
+          </Link>
+        </Button>
       </motion.div>
     </motion.div>
   );
