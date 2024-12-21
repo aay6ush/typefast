@@ -13,7 +13,7 @@ import {
 } from "@repo/ui/components/ui/form";
 import { Input } from "@repo/ui/components/ui/input";
 import { Mail, Lock, User, ArrowRight } from "lucide-react";
-import { signUpSchema, SignUpValues } from "@/lib/schemas";
+import { signUpSchema, SignUpValues } from "@repo/common/schemas";
 import { toast } from "sonner";
 import { register } from "@/actions/register";
 

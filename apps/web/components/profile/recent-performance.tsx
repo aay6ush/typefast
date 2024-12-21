@@ -26,11 +26,9 @@ import {
   DropdownMenuTrigger,
 } from "@repo/ui/components/ui/dropdown-menu";
 import { useState } from "react";
-import { RecentPerformanceProps } from "@/types";
+import { RecentPerformanceProps } from "@repo/common/types";
 
 const RecentPerformance = ({ recentTests }: RecentPerformanceProps) => {
-  console.log(recentTests);
-
   const [chartType, setChartType] = useState<"bar" | "line">("bar");
   const [timeRange, setTimeRange] = useState("week");
 

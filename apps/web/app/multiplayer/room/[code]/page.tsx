@@ -1,16 +1,16 @@
 "use client";
 
-import { useEffect, useState, useCallback, use } from "react";
+import { useEffect, useState, use } from "react";
 import { useSession } from "next-auth/react";
 import { Room as RoomType } from "@prisma/client";
-import useWsStore from "@/store/useWsStore";
 import { motion } from "framer-motion";
-import { Member } from "@/types";
+import { Member } from "@repo/common/types";
 import Header from "@/components/multiplayer/header";
 import Race from "@/components/multiplayer/race";
 import Chat from "@/components/multiplayer/chat";
 import Members from "@/components/multiplayer/members";
 import { LoaderPinwheel } from "lucide-react";
+import useSocket from "@/hooks/useSocket";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -30,45 +30,14 @@ const itemVariants = {
 const RoomPage = (props: { params: Promise<{ code: string }> }) => {
   const { code } = use(props.params);
 
-  const [roomData, setRoomData] = useState<RoomType | null>(null);
-
-  const { wsRef } = useWsStore((state) => state);
-
   const { data: session, status } = useSession();
 
-  const [countdown, setCountdown] = useState<number | null>(null);
-  const [isRaceActive, setIsRaceActive] = useState(false);
+  const [roomData, setRoomData] = useState<RoomType | null>(null);
   const [isRaceStarted, setIsRaceStarted] = useState(false);
   const [members, setMembers] = useState<Member[]>([]);
   const [raceText, setRaceText] = useState<string>("");
 
-  const connect = useCallback(() => {
-    if (!session?.user || !wsRef) return;
-
-    wsRef.send(
-      JSON.stringify({
-        type: "JOIN_ROOM",
-        userId: session?.user?.id,
-        roomCode: code,
-        userData: {
-          name: session?.user?.name,
-          image: session?.user?.image,
-        },
-      })
-    );
-
-    wsRef.onerror = (error) => {
-      console.error("WebSocket error:", error);
-    };
-
-    wsRef.onclose = () => {
-      setTimeout(() => {
-        if (document.visibilityState === "visible") {
-          connect();
-        }
-      }, 3000);
-    };
-  }, [session?.user, code, wsRef]);
+  const socket = useSocket();
 
   useEffect(() => {
     const getRoomData = async () => {
@@ -84,15 +53,21 @@ const RoomPage = (props: { params: Promise<{ code: string }> }) => {
 
   useEffect(() => {
     if (status === "loading") return;
-    if (!session?.user) return;
+    if (!session?.user || !socket) return;
 
-    connect();
-  }, [session, status, connect]);
+    socket.send(
+      JSON.stringify({
+        type: "JOIN_ROOM",
+        userId: session?.user?.id,
+        roomCode: code,
+        userData: {
+          name: session?.user?.name,
+          image: session?.user?.image,
+        },
+      })
+    );
 
-  useEffect(() => {
-    if (!wsRef) return;
-
-    wsRef.onmessage = (event) => {
+    socket.onmessage = (event) => {
       const data = JSON.parse(event.data);
 
       switch (data.type) {
@@ -100,38 +75,11 @@ const RoomPage = (props: { params: Promise<{ code: string }> }) => {
           setMembers(data.members);
           break;
 
-        case "PROGRESS_UPDATE":
-          setMembers((prevMembers) => {
-            const newMembers = prevMembers.map((member) =>
-              member.id === data.userId
-                ? { ...member, progress: data.progress }
-                : member
-            );
-            return newMembers;
-          });
-          break;
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!wsRef) {
-      return;
-    }
-
-    const handleMessage = (event: MessageEvent) => {
-      const data = JSON.parse(event.data);
-
-      switch (data.type) {
-        case "RACE_STARTING":
+        case "RACE_START":
           setIsRaceStarted(true);
           setRaceText(data.text);
-          setCountdown(5);
           break;
-        case "RACE_START":
-          setIsRaceActive(true);
-          setCountdown(null);
-          break;
+
         case "PROGRESS_UPDATE":
           setMembers((prevMembers) => {
             return prevMembers.map((member) =>
@@ -150,34 +98,7 @@ const RoomPage = (props: { params: Promise<{ code: string }> }) => {
           break;
       }
     };
-
-    wsRef.addEventListener("message", handleMessage);
-
-    return () => {
-      if (wsRef) {
-        wsRef.removeEventListener("message", handleMessage);
-      }
-    };
-  }, [wsRef]);
-
-  useEffect(() => {
-    if (countdown === null) {
-      return;
-    }
-
-    if (countdown > 0) {
-      const timer = setInterval(() => {
-        setCountdown((prev) => {
-          const next = prev !== null ? prev - 1 : null;
-          return next;
-        });
-      }, 1000);
-
-      return () => {
-        clearInterval(timer);
-      };
-    }
-  }, [countdown]);
+  }, [status, socket, code]);
 
   if (status === "loading") {
     return (
@@ -202,8 +123,7 @@ const RoomPage = (props: { params: Promise<{ code: string }> }) => {
         <Header
           roomData={roomData}
           isHost={isHost}
-          isRaceActive={isRaceActive}
-          countdown={countdown}
+          isRaceStarted={isRaceStarted}
         />
 
         <motion.div
@@ -213,9 +133,9 @@ const RoomPage = (props: { params: Promise<{ code: string }> }) => {
           {isRaceStarted ? (
             <Race
               members={members}
-              isRaceActive={isRaceActive}
+              isRaceStarted={isRaceStarted}
+              setIsRaceStarted={setIsRaceStarted}
               roomData={roomData}
-              countdown={countdown}
               raceText={raceText}
             />
           ) : (

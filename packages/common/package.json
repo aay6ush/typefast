@@ -1,0 +1,21 @@
+{
+  "name": "@repo/common",
+  "version": "0.0.0",
+  "private": true,
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {},
+  "exports": {
+    "./types": "./src/types/index.ts",
+    "./schemas": "./src/schemas/index.ts"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "*",
+    "@repo/typescript-config": "*",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "zod": "^3.24.1"
+  }
+}

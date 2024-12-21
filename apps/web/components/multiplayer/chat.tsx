@@ -14,7 +14,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@repo/ui/components/ui/avatar";
-import { ChatMessageProps, ChatProps, Message } from "@/types";
+import { ChatMessageProps, ChatProps, Message } from "@repo/common/types";
 import useWsStore from "@/store/useWsStore";
 import { v4 as uuidv4 } from "uuid";
 import { useSession } from "next-auth/react";

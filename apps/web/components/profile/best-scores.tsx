@@ -12,7 +12,7 @@ import {
 } from "@repo/ui/components/ui/tabs";
 import { Trophy, Clock, Type, Hourglass } from "lucide-react";
 import StatCard from "./stat-card";
-import { BestScoresProps } from "@/types";
+import { BestScoresProps } from "@repo/common/types";
 
 const BestScores = ({ allTimeBestScores }: BestScoresProps) => {
   const { time, words } = allTimeBestScores;
@@ -31,14 +31,14 @@ const BestScores = ({ allTimeBestScores }: BestScoresProps) => {
             <TabsList className="bg-neutral-800">
               <TabsTrigger
                 value="time"
-                className="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-neutral-900 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-neutral-700 data-[state=active]:text-neutral-50 data-[state=active]:shadow-sm"
+                className="inline-flex items-center justify-center whitespace-nowrap rounded-sm text-sm font-medium ring-offset-neutral-900 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-neutral-700 data-[state=active]:text-neutral-50 data-[state=active]:shadow-sm"
               >
                 <Hourglass className="mr-2 size-5" />
                 Time Mode
               </TabsTrigger>
               <TabsTrigger
                 value="words"
-                className="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-neutral-900 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-neutral-700 data-[state=active]:text-neutral-50 data-[state=active]:shadow-sm"
+                className="inline-flex items-center justify-center whitespace-nowrap rounded-sm text-sm font-medium ring-offset-neutral-900 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-neutral-700 data-[state=active]:text-neutral-50 data-[state=active]:shadow-sm"
               >
                 <Type className="mr-2 size-5" />
                 Words Mode

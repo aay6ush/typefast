@@ -3,8 +3,8 @@ import {
   Bolt,
   ChartNoAxesCombined,
   Crown,
+  Keyboard,
   Swords,
-  Type,
   User,
   Zap,
 } from "lucide-react";
@@ -16,7 +16,13 @@ export const wordOptions = [10, 25, 50];
 export const DEFAULT_TEST_MODE = "time";
 export const DEFAULT_TEST_MODE_OPTION = 15;
 
-export const publicRoutes = ["/", "/leaderboard", "/type", "/api/leaderboard"];
+export const publicRoutes = [
+  "/",
+  "/leaderboard",
+  "/type",
+  "/api/leaderboard",
+  "/api/stats",
+];
 export const authRoutes = ["/auth", "/auth/verification"];
 export const apiAuthPrefix = "/api/auth";
 export const DEFAULT_LOGIN_REDIRECT = "/type";
@@ -36,13 +42,13 @@ export const FEATURES = [
   },
   {
     icon: <ChartNoAxesCombined className="size-10 text-yellow-400" />,
-    title: "Detailed Analytics",
+    title: "Detailed Statistics",
     description: "Track progress over time with comprehensive stats.",
   },
   {
     icon: <Bolt className="size-10 text-violet-400" />,
-    title: "Customizable Practice",
-    description: "Choose from various typing modes to suit your needs.",
+    title: "Customizable Options",
+    description: "Choose from different typing modes to suit your needs.",
   },
   {
     icon: <Zap className="size-10 text-emerald-400" />,
@@ -86,7 +92,7 @@ export const NAVLINKS = [
     id: 1,
     name: "Type",
     href: "/type",
-    icon: Type,
+    icon: Keyboard,
   },
   {
     id: 2,

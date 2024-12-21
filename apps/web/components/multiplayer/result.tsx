@@ -7,15 +7,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@repo/ui/components/ui/card";
-import { Button } from "@repo/ui/components/ui/button";
 import { ChartContainer, ChartTooltip } from "@repo/ui/components/ui/chart";
-import {
-  Activity,
-  Target,
-  RotateCcw,
-  ChartNoAxesCombined,
-  Hourglass,
-} from "lucide-react";
+import { Activity, Target, ChartNoAxesCombined, Hourglass } from "lucide-react";
 import {
   LineChart,
   Line,
@@ -35,7 +28,6 @@ const Result = ({
   accuracy,
   time,
   wpmData,
-  onRestart,
   mode,
   modeOption,
 }: ResultProps) => {
@@ -134,7 +126,7 @@ const Result = ({
               <span>Performance Analysis</span>
             </CardTitle>
           </CardHeader>
-          <CardContent className="pr-10">
+          <CardContent>
             <ChartContainer
               config={{
                 wpm: {
@@ -231,13 +223,6 @@ const Result = ({
             </ChartContainer>
           </CardContent>
         </Card>
-      </motion.div>
-
-      <motion.div variants={itemVariants} className="flex justify-center">
-        <Button size="lg" onClick={onRestart}>
-          <RotateCcw />
-          Type Again
-        </Button>
       </motion.div>
     </motion.div>
   );

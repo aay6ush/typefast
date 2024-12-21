@@ -165,8 +165,6 @@ const Interface = () => {
     const finalWpm = calculateWPM(userInput.length, timePassed);
     const finalAccuracy = calculateAccuracy(userInput, text);
 
-    console.log(finalWpm, finalAccuracy);
-
     setWpm(finalWpm);
     setAccuracy(finalAccuracy);
 

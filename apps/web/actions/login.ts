@@ -1,6 +1,6 @@
 "use server";
 
-import { signInSchema } from "@/lib/schemas";
+import { signInSchema } from "@repo/common/schemas";
 import { getUserByEmail } from "@/db/user";
 import bcrypt from "bcryptjs";
 import { z } from "zod";

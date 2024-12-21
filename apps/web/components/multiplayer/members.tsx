@@ -13,7 +13,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@repo/ui/components/ui/avatar";
-import { MemberAvatarProps, MembersProps } from "@/types";
+import { MemberAvatarProps, MembersProps } from "@repo/common/types";
 
 const Members = ({ members }: MembersProps) => {
   return (

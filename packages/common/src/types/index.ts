@@ -61,17 +61,6 @@ export type BestScoresProps = {
   };
 };
 
-export type AchievementsProps = {
-  data: {
-    icon: ForwardRefExoticComponent<
-      Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
-    >;
-    title: string;
-    description: string;
-    achieved: boolean;
-  }[];
-};
-
 export type FeatureCardProps = {
   icon: ReactNode;
   title: string;
@@ -83,14 +72,6 @@ export type TestimonialCardProps = {
   username: string;
   image: string;
   tweet: string;
-};
-
-export type PrimaryButtonProps = {
-  text: string;
-  icon: ForwardRefExoticComponent<
-    Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
-  >;
-  iconPosition: "left" | "right";
 };
 
 export type LeaderboardDataType = {
@@ -136,8 +117,7 @@ export type PublicRoomsProps = {
 export type MultiplayerHeaderProps = {
   roomData: Room | null;
   isHost: boolean;
-  isRaceActive: boolean;
-  countdown: number | null;
+  isRaceStarted: boolean;
 };
 
 export type RoomSettingsProps = {
@@ -153,9 +133,9 @@ export type MemberAvatarProps = { name: string; image: string };
 
 export type RaceProps = {
   members: Member[];
-  isRaceActive: boolean;
+  isRaceStarted: boolean;
+  setIsRaceStarted: Dispatch<React.SetStateAction<boolean>>;
   roomData: Room | null;
-  countdown: number | null;
   raceText: string;
 };
 

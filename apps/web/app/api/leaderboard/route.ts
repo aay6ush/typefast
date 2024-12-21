@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import redis from "@/lib/redis";
 import { auth } from "@/auth";
-import { LeaderboardDataType, LeaderboardEntry } from "@/types";
+import { LeaderboardDataType, LeaderboardEntry } from "@repo/common/types";
 
 const ALL_TIME_LEADERBOARD = "typefast:leaderboard:alltime";
 const DAILY_LEADERBOARD = "typefast:leaderboard:daily";

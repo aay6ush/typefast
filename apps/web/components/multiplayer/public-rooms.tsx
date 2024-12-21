@@ -1,11 +1,11 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { Card, CardContent } from "@repo/ui/components/ui/card";
-import { Users, Signal, Hash, Loader2, Type, Hourglass } from "lucide-react";
+import { Loader2, Type, Hourglass } from "lucide-react";
 import { Button } from "@repo/ui/components/ui/button";
 import { ScrollArea } from "@repo/ui/components/ui/scroll-area";
 import { toast } from "sonner";
-import { PublicRoomsProps } from "@/types";
+import { PublicRoomsProps } from "@repo/common/types";
 
 const PublicRooms = ({ rooms }: PublicRoomsProps) => {
   const [isPending, startTransition] = useTransition();

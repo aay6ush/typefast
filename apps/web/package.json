@@ -14,6 +14,7 @@
     "@hookform/resolvers": "^3.9.1",
     "@repo/db": "*",
     "@repo/ui": "*",
+    "@repo/common": "*",
     "@upstash/redis": "^1.34.3",
     "bcryptjs": "^2.4.3",
     "framer-motion": "^11.13.5",

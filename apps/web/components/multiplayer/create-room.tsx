@@ -30,7 +30,7 @@ import {
 import { Switch } from "@repo/ui/components/ui/switch";
 import { modes, timeOptions, wordOptions } from "@/constants";
 import { toast } from "sonner";
-import { roomSchema, RoomValues } from "@/lib/schemas";
+import { roomSchema, RoomValues } from "@repo/common/schemas";
 import { useTransition } from "react";
 
 const CreateRoom = () => {

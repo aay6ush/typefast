@@ -1,5 +1,5 @@
 import { Activity, BarChart3, Clock, Target } from "lucide-react";
-import { StatsGridProps } from "@/types";
+import { StatsGridProps } from "@repo/common/types";
 import StatCard from "./stat-card";
 
 const StatsGrid = ({ stats }: StatsGridProps) => {

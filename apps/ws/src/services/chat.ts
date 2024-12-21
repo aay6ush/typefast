@@ -1,6 +1,5 @@
 import WebSocket, { WebSocketServer } from "ws";
 import { UserManager } from "./user";
-import { Message } from "../types";
 import { RedisManager } from "./redis";
 import { Server } from "node:http";
 
@@ -41,28 +40,19 @@ export class ChatServer {
 
   private async handleMessage(ws: WebSocket, data: WebSocket.RawData) {
     try {
-      const parsedData: Message = JSON.parse(data.toString());
+      const parsedData = JSON.parse(data.toString());
       const { type, userId, roomCode, userData } = parsedData;
 
       if (!this.userManager.getUser(userId)) {
         this.userManager.addUser(userId, ws, userData);
-        this.broadcastOnlineUsers();
       }
 
       switch (type) {
-        case "GET_ONLINE_USERS":
-          this.sendOnlineUsers(ws);
-          break;
         case "JOIN_ROOM":
           await this.handleJoinRoom(userId, roomCode);
           break;
         case "SEND_MESSAGE":
-          await this.handleSendMessage(
-            ws,
-            userId,
-            roomCode,
-            parsedData.message!
-          );
+          await this.handleSendMessage(userId, roomCode, parsedData.message!);
           break;
         case "START_RACE":
           await this.handleStartRace(roomCode, parsedData.text!);
@@ -80,31 +70,8 @@ export class ChatServer {
     }
   }
 
-  private sendOnlineUsers(ws: WebSocket) {
-    const count = this.userManager.getUserCount();
-    ws.send(
-      JSON.stringify({
-        type: "ONLINE_USERS",
-        count,
-      })
-    );
-  }
-
-  private broadcastOnlineUsers() {
-    const count = this.userManager.getUserCount();
-    const message = JSON.stringify({
-      type: "ONLINE_USERS",
-      count,
-    });
-
-    this.userManager.getAllUsers().forEach((user) => {
-      if (user.ws.readyState === WebSocket.OPEN) {
-        user.ws.send(message);
-      }
-    });
-  }
-
   private async handleJoinRoom(userId: string, roomCode: string) {
+    console.log("JOIN room called");
     try {
       const user = this.userManager.getUser(userId);
       if (!user) {
@@ -139,7 +106,6 @@ export class ChatServer {
   }
 
   private async handleSendMessage(
-    ws: WebSocket,
     userId: string,
     roomCode: string,
     message: string
@@ -174,21 +140,10 @@ export class ChatServer {
       }
 
       this.pubSub.publish(roomCode, {
-        type: "RACE_STARTING",
+        type: "RACE_START",
         timestamp: Date.now(),
         text,
       });
-
-      setTimeout(async () => {
-        try {
-          this.pubSub.publish(roomCode, {
-            type: "RACE_START",
-            timestamp: Date.now(),
-          });
-        } catch (error) {
-          console.error("Error publishing RACE_START:", error);
-        }
-      }, 5000);
     } catch (error) {
       console.error("Error in handleStartRace:", error);
     }
@@ -237,7 +192,6 @@ export class ChatServer {
       });
 
       this.userManager.removeUser(userId);
-      this.broadcastOnlineUsers();
     }
   }
 }

@@ -12,7 +12,7 @@ import {
 } from "@repo/ui/components/ui/form";
 import { Input } from "@repo/ui/components/ui/input";
 import { Mail, Lock, ArrowRight } from "lucide-react";
-import { signInSchema, SignInValues } from "@/lib/schemas";
+import { signInSchema, SignInValues } from "@repo/common/schemas";
 import { useTransition } from "react";
 import { login } from "@/actions/login";
 import { toast } from "sonner";

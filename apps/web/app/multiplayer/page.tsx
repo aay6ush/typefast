@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useTransition } from "react";
 import { motion } from "framer-motion";
-import { Globe, Hash, LoaderPinwheel } from "lucide-react";
+import { Hash, LoaderPinwheel } from "lucide-react";
 import CreateRoom from "@/components/multiplayer/create-room";
 import JoinRoom from "@/components/multiplayer/join-room";
 import PublicRooms from "@/components/multiplayer/public-rooms";
@@ -13,7 +13,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@repo/ui/components/ui/card";
-import useWsStore from "@/store/useWsStore";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -33,10 +32,6 @@ const itemVariants = {
 const MultiplayerPage = () => {
   const [rooms, setRooms] = useState<Room[]>([]);
   const [isPending, startTransition] = useTransition();
-  const [onlinePlayers, setOnlinePlayers] = useState<number>(0);
-  const [ping, setPing] = useState<number>(0);
-
-  const { setWsRef } = useWsStore((state) => state);
 
   useEffect(() => {
     const fetchRooms = async () => {
@@ -56,19 +51,6 @@ const MultiplayerPage = () => {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    const ws = new WebSocket("ws://localhost:8080");
-    setWsRef(ws);
-
-    ws.onopen = () => {
-      console.log("WebSocket connection established");
-    };
-
-    ws.onclose = () => {
-      console.log("WebSocket connection closed");
-    };
-  }, [setWsRef]);
-
   return (
     <motion.div
       variants={containerVariants}
@@ -79,20 +61,9 @@ const MultiplayerPage = () => {
       <div className="w-full max-w-5xl mx-auto space-y-8 pb-16 px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={itemVariants}
-          className="flex flex-col sm:flex-row justify-between items-center pt-8 pb-4 border-b border-neutral-800"
+          className="flex flex-col sm:flex-row justify-between items-center pt-8"
         >
           <h1 className="text-3xl font-bold mb-4 sm:mb-0">Multiplayer Arena</h1>
-          <div className="flex items-center space-x-6">
-            <div className="flex items-center text-emerald-400">
-              <Globe className="size-5 mr-2" />
-              <span className="font-semibold">{onlinePlayers} online</span>
-            </div>
-
-            <div className="flex items-center text-violet-400">
-              <Hash className="size-5 mr-2" />
-              <span className="font-semibold">{rooms.length} rooms</span>
-            </div>
-          </div>
         </motion.div>
 
         <motion.div

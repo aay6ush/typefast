@@ -1,21 +1,12 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { motion } from "framer-motion";
-import {
-  Copy,
-  LogOut,
-  Hash,
-  PlayCircle,
-  Settings,
-  Type,
-  Hourglass,
-} from "lucide-react";
+import { Copy, Hash, PlayCircle, Type, Hourglass } from "lucide-react";
 import { Button } from "@repo/ui/components/ui/button";
-import { Dialog, DialogTrigger } from "@repo/ui/components/ui/dialog";
 import useWsStore from "@/store/useWsStore";
 import { generateRandomWords } from "@/lib/utils";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
-import { MultiplayerHeaderProps, RoomSettingsProps } from "@/types";
+import { MultiplayerHeaderProps } from "@repo/common/types";
 
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -25,10 +16,8 @@ const itemVariants = {
 const Header = ({
   roomData,
   isHost,
-  isRaceActive,
-  countdown,
+  isRaceStarted,
 }: MultiplayerHeaderProps) => {
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const { wsRef } = useWsStore((state) => state);
   const { data: session } = useSession();
 
@@ -112,38 +101,14 @@ const Header = ({
         </div>
       </div>
       <div className="flex gap-3 w-full lg:w-auto">
-        <Button onClick={handleStartTest} disabled={!isHost || isRaceActive}>
-          <PlayCircle />
-          {countdown !== null
-            ? `Starting in ${countdown}s`
-            : isRaceActive
-              ? "Race in Progress"
-              : "Start Race"}
-        </Button>
-        <RoomSettings
-          isSettingsOpen={isSettingsOpen}
-          setIsSettingsOpen={setIsSettingsOpen}
-        />
-        <Button variant="destructive" size="icon" aria-label="Leave room">
-          <LogOut className="!size-5" />
-        </Button>
+        {isHost && (
+          <Button size="lg" onClick={handleStartTest} disabled={isRaceStarted}>
+            <PlayCircle />
+            {isRaceStarted ? "Race in Progress" : "Start Race"}
+          </Button>
+        )}
       </div>
     </motion.div>
-  );
-};
-
-const RoomSettings = ({
-  isSettingsOpen,
-  setIsSettingsOpen,
-}: RoomSettingsProps) => {
-  return (
-    <Dialog open={isSettingsOpen} onOpenChange={setIsSettingsOpen}>
-      <DialogTrigger asChild>
-        <Button size="icon" variant="secondary">
-          <Settings className="!size-5" />
-        </Button>
-      </DialogTrigger>
-    </Dialog>
   );
 };
 

@@ -3,7 +3,7 @@
 import { auth } from "@/auth";
 import { getUserByEmail } from "@/db/user";
 import prisma from "@repo/db/client";
-import { AddTestTypes } from "@/types";
+import { AddTestTypes } from "@repo/common/types";
 
 export const addTest = async ({
   wpm,

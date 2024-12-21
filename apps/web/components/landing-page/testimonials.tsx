@@ -11,7 +11,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@repo/ui/components/ui/avatar";
-import { TestimonialCardProps } from "@/types";
+import { TestimonialCardProps } from "@repo/common/types";
 import { TESTIMONIALS } from "@/constants";
 import { BadgeCheck } from "lucide-react";
 

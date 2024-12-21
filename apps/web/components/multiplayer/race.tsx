@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { Card, CardContent } from "@repo/ui/components/ui/card";
 import {
   Avatar,
@@ -8,23 +8,37 @@ import {
 import Interface from "@/components/multiplayer/interface";
 import useWsStore from "@/store/useWsStore";
 import { useSession } from "next-auth/react";
-import { MemberProgressProps, RaceProps } from "@/types";
+import { MemberProgressProps, RaceProps } from "@repo/common/types";
 
 const Race = ({
   members,
-  isRaceActive,
+  isRaceStarted,
+  setIsRaceStarted,
   roomData,
-  countdown,
   raceText,
 }: RaceProps) => {
   const { wsRef } = useWsStore((state) => state);
   const { data: session } = useSession();
 
+  useEffect(() => {
+    let isAllTypistFinished = false;
+
+    if (members.length > 0) {
+      isAllTypistFinished = members.every(
+        (member) => member.progress?.progress === 100
+      );
+    }
+
+    if (isAllTypistFinished) {
+      setIsRaceStarted(false);
+    }
+  }, [members]);
+
   const handleProgressUpdate = useCallback(
     (wpm: number, accuracy: number, progress: number) => {
       if (!roomData?.code || !session?.user?.id) return;
 
-      if (isRaceActive && wsRef?.readyState === WebSocket.OPEN) {
+      if (isRaceStarted && wsRef?.readyState === WebSocket.OPEN) {
         try {
           wsRef.send(
             JSON.stringify({
@@ -43,7 +57,7 @@ const Race = ({
         }
       }
     },
-    [isRaceActive, wsRef, session?.user?.id, roomData?.code]
+    [isRaceStarted, wsRef, session?.user?.id, roomData?.code]
   );
 
   if (!roomData) return null;

@@ -8,8 +8,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@repo/ui/components/ui/card";
-import { FeatureCardProps } from "@/types";
 import { FEATURES } from "@/constants";
+import { FeatureCardProps } from "@repo/common/types";
 
 const containerVariants = {
   hidden: { opacity: 0 },

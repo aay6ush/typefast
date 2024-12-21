@@ -11,7 +11,7 @@ export const GET = async () => {
       { name: "Races Completed", value: totalTests },
     ]);
   } catch (error) {
-    console.log("Error fetching room: ", error);
+    console.error("Error fetching room: ", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

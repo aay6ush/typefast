@@ -22,7 +22,7 @@ import {
   FormMessage,
 } from "@repo/ui/components/ui/form";
 import { Input } from "@repo/ui/components/ui/input";
-import { joinRoomSchema, JoinRoomValues } from "@/lib/schemas";
+import { joinRoomSchema, JoinRoomValues } from "@repo/common/schemas";
 
 const JoinRoom = () => {
   const [isPending, startTransition] = useTransition();

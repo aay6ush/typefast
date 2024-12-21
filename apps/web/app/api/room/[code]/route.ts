@@ -1,9 +1,10 @@
 import prisma from "@repo/db/client";
 import { NextRequest, NextResponse } from "next/server";
 
-export const GET = async (segmentData: {
-  params: Promise<{ code: string }>;
-}) => {
+export const GET = async (
+  request: NextRequest,
+  segmentData: { params: Promise<{ code: string }> }
+) => {
   try {
     const { code } = await segmentData.params;
 

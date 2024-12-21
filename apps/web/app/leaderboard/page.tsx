@@ -35,7 +35,7 @@ import {
 import { Medal } from "lucide-react";
 import { ScrollArea } from "@repo/ui/components/ui/scroll-area";
 import { Badge } from "@repo/ui/components/ui/badge";
-import { LeaderboardDataType } from "@/types";
+import { LeaderboardDataType } from "@repo/common/types";
 import Link from "next/link";
 import { modes } from "@/constants";
 

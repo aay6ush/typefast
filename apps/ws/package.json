@@ -12,6 +12,7 @@
     "test": ""
   },
   "dependencies": {
+    "@repo/common": "*",
     "express": "^4.18.3",
     "ioredis": "^5.4.1",
     "ws": "^8.18.0"

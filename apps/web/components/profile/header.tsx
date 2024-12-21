@@ -3,7 +3,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@repo/ui/components/ui/avatar";
-import { ProfileHeaderProps } from "@/types";
+import { ProfileHeaderProps } from "@repo/common/types";
 
 const Header = ({ image, name }: ProfileHeaderProps) => {
   return (

@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import { roomSchema } from "@/lib/schemas";
+import { roomSchema } from "@repo/common/schemas";
 import { generateRoomCode } from "@/lib/utils";
 import prisma from "@repo/db/client";
 import { NextRequest, NextResponse } from "next/server";
@@ -38,7 +38,7 @@ export const POST = async (request: NextRequest) => {
 
     return NextResponse.json(room);
   } catch (error) {
-    console.log("Error creating room: ", error);
+    console.error("Error creating room: ", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 };
@@ -58,7 +58,7 @@ export const GET = async () => {
 
     return NextResponse.json(rooms);
   } catch (error) {
-    console.log("Error fetching public rooms: ", error);
+    console.error("Error fetching public rooms: ", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 };

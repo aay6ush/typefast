@@ -2,7 +2,7 @@
 
 import { modes, timeOptions, wordOptions } from "@/constants";
 import { cn } from "@/lib/utils";
-import { ModesProps } from "@/types";
+import { ModesProps } from "@repo/common/types";
 import { motion } from "framer-motion";
 import { Hourglass, Type } from "lucide-react";
 

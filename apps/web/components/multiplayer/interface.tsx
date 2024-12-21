@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { calculateAccuracy, calculateWPM, cn } from "@/lib/utils";
-import Result from "../typing/result";
-import { InterfaceProps } from "@/types";
+import { InterfaceProps } from "@repo/common/types";
+import Result from "./result";
 
 const Interface = ({ mode, modeOption, text, onProgress }: InterfaceProps) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -115,8 +115,6 @@ const Interface = ({ mode, modeOption, text, onProgress }: InterfaceProps) => {
     const finalWpm = calculateWPM(userInput.length, timePassed);
     const finalAccuracy = calculateAccuracy(userInput, text);
 
-    console.log(finalWpm, finalAccuracy);
-
     setWpm(finalWpm);
     setAccuracy(finalAccuracy);
 
@@ -138,7 +136,7 @@ const Interface = ({ mode, modeOption, text, onProgress }: InterfaceProps) => {
     if (raceStarted && timePassed > 0) {
       const currentWpm = calculateWPM(userInput.length, timePassed);
       const currentAccuracy = calculateAccuracy(userInput, text);
-      const progress = (userInput.length / text.length) * 100;
+      const progress = ((userInput.length + 1) / text.length) * 100;
 
       setWpm(currentWpm);
       setAccuracy(currentAccuracy);
@@ -239,7 +237,6 @@ const Interface = ({ mode, modeOption, text, onProgress }: InterfaceProps) => {
           accuracy={accuracy}
           time={timePassed}
           wpmData={wpmData}
-          onRestart={resetTest}
           mode={mode}
           modeOption={modeOption}
         />
