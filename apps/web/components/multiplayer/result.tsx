@@ -30,7 +30,7 @@ const Result = ({
   wpmData,
   mode,
   modeOption,
-}: ResultProps) => {
+}: Omit<ResultProps, "onRestart">) => {
   useEffect(() => {
     const saveTest = async () => {
       try {
@@ -176,7 +176,7 @@ const Result = ({
                                   Time
                                 </span>
                                 <span className="font-bold text-neutral-200">
-                                  {payload[0].payload.time}s
+                                  {payload[0]!.payload.time}s
                                 </span>
                               </div>
                               <div className="flex flex-col">
@@ -184,7 +184,7 @@ const Result = ({
                                   WPM
                                 </span>
                                 <span className="font-bold text-neutral-200">
-                                  {payload[0].payload.wpm}
+                                  {payload[0]!.payload.wpm}
                                 </span>
                               </div>
                             </div>

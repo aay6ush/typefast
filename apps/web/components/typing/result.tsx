@@ -184,7 +184,7 @@ const Result = ({
                                   Time
                                 </span>
                                 <span className="font-bold text-neutral-200">
-                                  {payload[0].payload.time}s
+                                  {payload[0]?.payload.time}s
                                 </span>
                               </div>
                               <div className="flex flex-col">
@@ -192,7 +192,7 @@ const Result = ({
                                   WPM
                                 </span>
                                 <span className="font-bold text-neutral-200">
-                                  {payload[0].payload.wpm}
+                                  {payload[0]?.payload.wpm}
                                 </span>
                               </div>
                             </div>

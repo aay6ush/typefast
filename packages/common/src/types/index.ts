@@ -84,10 +84,10 @@ export type LeaderboardDataType = {
 };
 
 export type RecentPerformanceProps = {
-  recentTests: { date: string; wpm: number }[];
+  recentTests: { date: string | undefined; wpm: number }[];
 };
 
-type LeaderboardEntry = Omit<LeaderboardDataType, "rank">;
+export type LeaderboardEntry = Omit<LeaderboardDataType, "rank">;
 
 export type Message = {
   id: string;

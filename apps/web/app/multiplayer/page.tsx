@@ -44,7 +44,9 @@ const MultiplayerPage = () => {
       }
     };
 
-    startTransition(() => fetchRooms());
+    startTransition(() => {
+      fetchRooms();
+    });
 
     const interval = setInterval(fetchRooms, 3000);
 

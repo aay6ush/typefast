@@ -1,11 +1,10 @@
 "use server";
 
-import { signInSchema } from "@repo/common/schemas";
+import { signInSchema, SignInValues } from "@repo/common/schemas";
 import { getUserByEmail } from "@/db/user";
 import bcrypt from "bcryptjs";
-import { z } from "zod";
 
-export const login = async (values: z.infer<typeof signInSchema>) => {
+export const login = async (values: SignInValues) => {
   const validation = signInSchema.safeParse(values);
 
   if (!validation.success) {

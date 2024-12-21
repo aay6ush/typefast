@@ -10,10 +10,10 @@ const Modes = ({ mode, setMode, modeOption, setModeOption }: ModesProps) => {
   const handleModeChange = (mode: string) => {
     if (mode === "time") {
       setMode(mode);
-      setModeOption(timeOptions[0]);
+      setModeOption(timeOptions[0]!);
     } else if (mode === "words") {
       setMode(mode);
-      setModeOption(wordOptions[0]);
+      setModeOption(wordOptions[0]!);
     }
   };
 

@@ -1,14 +1,13 @@
 "use server";
 
-import { z } from "zod";
 import bcrypt from "bcryptjs";
 import { getUserByEmail } from "@/db/user";
 import { sendVerificationEmail } from "@/lib/resend";
-import { signUpSchema } from "@repo/common/schemas";
+import { signUpSchema, SignUpValues } from "@repo/common/schemas";
 import prisma from "@repo/db/client";
 import { generateVerificationToken } from "@/lib/utils";
 
-export const register = async (values: z.infer<typeof signUpSchema>) => {
+export const register = async (values: SignUpValues) => {
   const validation = signUpSchema.safeParse(values);
 
   if (!validation.success) {

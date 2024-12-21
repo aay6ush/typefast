@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@repo/ui/components/ui/card";
-import { TrendingUp, ChevronDown, ChartNoAxesCombined } from "lucide-react";
+import { ChevronDown, ChartNoAxesCombined } from "lucide-react";
 import { Button } from "@repo/ui/components/ui/button";
 import {
   BarChart,
@@ -138,7 +138,7 @@ const RecentPerformance = ({ recentTests }: RecentPerformanceProps) => {
                                 Date
                               </span>
                               <span className="font-bold text-neutral-200">
-                                {payload[0].payload.date}
+                                {payload[0]?.payload.date}
                               </span>
                             </div>
                             <div className="flex flex-col">
@@ -146,7 +146,7 @@ const RecentPerformance = ({ recentTests }: RecentPerformanceProps) => {
                                 WPM
                               </span>
                               <span className="font-bold text-neutral-200">
-                                {payload[0].payload.wpm}
+                                {payload[0]?.payload.wpm}
                               </span>
                             </div>
                           </div>
@@ -193,7 +193,7 @@ const RecentPerformance = ({ recentTests }: RecentPerformanceProps) => {
                                 Date
                               </span>
                               <span className="font-bold text-neutral-200">
-                                {payload[0].payload.date}
+                                {payload[0]?.payload.date}
                               </span>
                             </div>
                             <div className="flex flex-col">
@@ -201,7 +201,7 @@ const RecentPerformance = ({ recentTests }: RecentPerformanceProps) => {
                                 WPM
                               </span>
                               <span className="font-bold text-neutral-200">
-                                {payload[0].payload.wpm}
+                                {payload[0]?.payload.wpm}
                               </span>
                             </div>
                           </div>

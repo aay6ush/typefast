@@ -2,7 +2,6 @@
 
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
-import PrimaryButton from "./button";
 import { Button } from "@repo/ui/components/ui/button";
 import Link from "next/link";
 

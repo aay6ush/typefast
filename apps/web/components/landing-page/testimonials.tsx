@@ -90,7 +90,7 @@ export const TestimonialCard = ({
           <div className="flex items-center gap-x-3">
             <Avatar className="size-8">
               <AvatarImage src={image} />
-              <AvatarFallback>{name.split(" ")[0][0]}</AvatarFallback>
+              <AvatarFallback>{name.split(" ")?.[0]?.[0]}</AvatarFallback>
             </Avatar>
             <div className="flex gap-x-1 items-center">
               <span className="font-bold text-neutral-200">{name}</span>
