@@ -1,0 +1,10 @@
+node_modules
+.turbo
+npm-debug.log
+build
+
+.git
+.gitignore
+
+./packages/db/.env
+./apps/web/.env
