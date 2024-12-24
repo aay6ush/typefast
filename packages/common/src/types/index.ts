@@ -1,6 +1,16 @@
-import { Room } from "@prisma/client";
 import { Dispatch, JSX, ReactNode, SetStateAction } from "react";
 import WebSocket from "ws";
+
+type Room = {
+  mode: string;
+  modeOption: number;
+  name: string;
+  id: string;
+  code: string;
+  userId: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
 
 export type ModesProps = {
   mode: string;

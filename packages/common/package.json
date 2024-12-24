@@ -13,10 +13,12 @@
   "devDependencies": {
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
+    "@types/react": "^19.0.2",
     "@types/ws": "^8.5.13",
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "react": "^19.0.0",
     "ws": "^8.18.0",
     "zod": "^3.24.1"
   }
