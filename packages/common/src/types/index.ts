@@ -1,5 +1,5 @@
 import { Room } from "@prisma/client";
-import { Dispatch, ReactNode, SetStateAction } from "react";
+import { Dispatch, JSX, ReactNode, SetStateAction } from "react";
 
 export type ModesProps = {
   mode: string;
@@ -62,7 +62,7 @@ export type BestScoresProps = {
 };
 
 export type FeatureCardProps = {
-  icon: ReactNode;
+  icon: JSX.Element;
   title: string;
   description: string;
 };

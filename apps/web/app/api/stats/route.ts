@@ -12,9 +12,6 @@ export const GET = async () => {
     ]);
   } catch (error) {
     console.error("Error fetching room: ", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    return new NextResponse("Internal Error", { status: 500 });
   }
 };

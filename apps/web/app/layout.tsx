@@ -7,7 +7,6 @@ import { Header } from "@/components/header";
 
 const geistMono = Geist_Mono({
   subsets: ["latin"],
-  display: "swap",
 });
 
 export const metadata: Metadata = {

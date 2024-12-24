@@ -4,9 +4,9 @@
   "type": "module",
   "private": true,
   "exports": {
-    "./tailwind.config": "./tailwind.config.js",
+    "./tailwind.config": "./tailwind.config.ts",
     "./globals.css": "./src/globals.css",
-    "./postcss.config": "./postcss.config.js",
+    "./postcss.config": "./postcss.config.mjs",
     "./lib/*": "./src/lib/*.ts",
     "./components/*": "./src/components/*.tsx",
     "./hooks/*": "./src/hooks/*.tsx"
@@ -21,11 +21,11 @@
     "@repo/typescript-config": "*",
     "@turbo/gen": "^1.12.4",
     "@types/node": "^20.11.24",
-    "@types/react": "18.3.0",
-    "@types/react-dom": "18.3.1",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.16",
+    "tailwindcss": "^3.4.17",
     "typescript": "5.5.4"
   },
   "dependencies": {

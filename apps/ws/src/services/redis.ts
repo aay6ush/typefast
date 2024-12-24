@@ -1,6 +1,6 @@
 import Redis from "ioredis";
 
-const URL = "redis://localhost:6379";
+const URL = process.env.REDIS_URL || "redis://localhost:6379";
 
 export class RedisManager {
   private publisher: Redis;
