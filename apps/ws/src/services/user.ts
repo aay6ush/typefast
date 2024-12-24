@@ -1,5 +1,5 @@
+import { User } from "@repo/common/types";
 import WebSocket from "ws";
-import { User } from "../types";
 
 export class UserManager {
   private users: Map<string, User>;

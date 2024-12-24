@@ -13,9 +13,11 @@
   "devDependencies": {
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
+    "@types/ws": "^8.5.13",
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "ws": "^8.18.0",
     "zod": "^3.24.1"
   }
 }

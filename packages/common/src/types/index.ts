@@ -1,5 +1,6 @@
 import { Room } from "@prisma/client";
 import { Dispatch, JSX, ReactNode, SetStateAction } from "react";
+import WebSocket from "ws";
 
 export type ModesProps = {
   mode: string;
@@ -156,4 +157,12 @@ export type InterfaceProps = {
   modeOption: number;
   text: string;
   onProgress: (wpm: number, accuracy: number, progress: number) => void;
+};
+
+export type User = {
+  userId: string;
+  name: string;
+  image: string | null;
+  ws: WebSocket;
+  rooms: string[];
 };
