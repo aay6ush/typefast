@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: typefast-ws
-          image: aay6ush/typefast-ws:latest
+          image: aay6ush/typefast-ws:979f96deb1573fc90f85c2991d11a1711a00cc55
           ports:
             - containerPort: 8080
           env:
