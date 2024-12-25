@@ -16,26 +16,36 @@ export const GET = async (request: NextRequest) => {
     timeFrame === "daily" ? DAILY_LEADERBOARD : ALL_TIME_LEADERBOARD;
 
   try {
-    const scores = await redis.zrange(leaderboardKey, 0, limit - 1, {
+    const scores = await redis.zrange(leaderboardKey, 0, -1, {
       rev: true,
       withScores: true,
     });
 
-    const leaderboard: LeaderboardDataType[] = [];
+    const userHighestScores = new Map<string, LeaderboardDataType>();
+
     for (let i = 0; i < scores.length; i += 2) {
       const userData = scores[i] as LeaderboardEntry;
 
       if (mode === "all" || userData.mode === mode) {
-        leaderboard.push({
-          rank: Math.floor(i / 2) + 1,
-          name: userData.name,
-          wpm: userData.wpm,
-          accuracy: userData.accuracy,
-          time: userData.time,
-          mode: userData.mode,
-        });
+        if (!userHighestScores.has(userData.name)) {
+          userHighestScores.set(userData.name, {
+            rank: 0,
+            name: userData.name,
+            wpm: userData.wpm,
+            accuracy: userData.accuracy,
+            time: userData.time,
+            mode: userData.mode,
+          });
+        }
       }
     }
+
+    const leaderboard = Array.from(userHighestScores.values())
+      .slice(0, limit)
+      .map((entry, index) => ({
+        ...entry,
+        rank: index + 1,
+      }));
 
     return NextResponse.json({ leaderboard });
   } catch (error) {
@@ -77,6 +87,28 @@ export const POST = async (request: NextRequest) => {
       mode,
       timestamp: Date.now(),
     });
+
+    const allTimeScores = await redis.zrange(ALL_TIME_LEADERBOARD, 0, -1, {
+      withScores: true,
+    });
+    const dailyScores = await redis.zrange(DAILY_LEADERBOARD, 0, -1, {
+      withScores: true,
+    });
+
+    for (let i = 0; i < allTimeScores.length; i += 2) {
+      const entry = allTimeScores[i] as LeaderboardEntry;
+      console.log("ENTRY", entry);
+      if (entry.name === session.user.name) {
+        await redis.zrem(ALL_TIME_LEADERBOARD, allTimeScores[i]);
+      }
+    }
+
+    for (let i = 0; i < dailyScores.length; i += 2) {
+      const entry = dailyScores[i] as LeaderboardEntry;
+      if (entry.name === session.user.name) {
+        await redis.zrem(DAILY_LEADERBOARD, dailyScores[i]);
+      }
+    }
 
     await Promise.all([
       redis.zadd(ALL_TIME_LEADERBOARD, { score, member: userData }),
