@@ -1,0 +1,28 @@
+name: Linting and Formatting on PR
+on:
+  pull_request:
+    branches:
+      - "**"
+
+jobs:
+  Continuous-Integration:
+    name: Performs linting, formatting on the application
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the Repository
+        uses: actions/checkout@v3
+
+      - name: Setup yarn
+        run: npm install -g yarn
+
+      - name: Install Dependencies
+        run: yarn
+
+      - name: Run linting check
+        run: yarn lint
+
+      - name: Check formatting
+        run: yarn format
+
+      - name: Run build
+        run: yarn build
