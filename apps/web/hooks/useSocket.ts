@@ -1,3 +1,4 @@
+import { WS_URL } from "@/constants";
 import useWsStore from "@/store/useWsStore";
 import { useEffect, useState } from "react";
 
@@ -6,7 +7,7 @@ const useSocket = () => {
   const { setWsRef } = useWsStore((state) => state);
 
   useEffect(() => {
-    const ws = new WebSocket("ws://localhost:8080");
+    const ws = new WebSocket(WS_URL);
 
     ws.onopen = () => {
       console.log("WebSocket connection established");

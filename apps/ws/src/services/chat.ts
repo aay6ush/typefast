@@ -71,7 +71,6 @@ export class ChatServer {
   }
 
   private async handleJoinRoom(userId: string, roomCode: string) {
-    console.log("JOIN room called");
     try {
       const user = this.userManager.getUser(userId);
       if (!user) {

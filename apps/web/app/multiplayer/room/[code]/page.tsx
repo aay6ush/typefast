@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, use } from "react";
+import { useEffect, useState, use, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import { Room as RoomType } from "@prisma/client";
 import { motion } from "framer-motion";
@@ -51,7 +51,7 @@ const RoomPage = (props: { params: Promise<{ code: string }> }) => {
     }
   }, [code]);
 
-  useEffect(() => {
+  const joinRoom = useCallback(() => {
     if (status === "loading") return;
     if (!session?.user || !socket) return;
 
@@ -98,7 +98,11 @@ const RoomPage = (props: { params: Promise<{ code: string }> }) => {
           break;
       }
     };
-  }, [status, socket, code]);
+  }, [code, socket, status, isRaceStarted]);
+
+  useEffect(() => {
+    joinRoom();
+  }, [joinRoom]);
 
   if (status === "loading") {
     return (

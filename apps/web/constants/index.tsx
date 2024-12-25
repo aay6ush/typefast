@@ -114,4 +114,5 @@ export const NAVLINKS = [
   },
 ];
 
-export const REDIS_URL = process.env.REDIS_URL ?? "redis://localhost:6379";
+export const WS_URL =
+  process.env.NEXT_PUBLIC_WS_URL ?? "https://ws.typefast.club";
