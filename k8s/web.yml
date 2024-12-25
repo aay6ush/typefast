@@ -19,7 +19,7 @@ spec:
             - containerPort: 3000
           volumeMounts:
             - name: env
-              mountPath: /app/.env
+              mountPath: /app/apps/web/.env
               subPath: .env
       volumes:
         - name: env
