@@ -1,0 +1,27 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: typefast-cert
+  namespace: default
+spec:
+  secretName: typefast-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: typefast.club
+  dnsNames:
+    - typefast.club
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: typefast-ws-cert
+  namespace: default
+spec:
+  secretName: typefast-ws-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: ws.typefast.club
+  dnsNames:
+    - ws.typefast.club

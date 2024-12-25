@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: typefast
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/aay6ush/typefast.git
+    targetRevision: dev
+    path: k8s
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

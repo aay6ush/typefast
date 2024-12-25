@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: typefast-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: typefast-web
+  template:
+    metadata:
+      labels:
+        app: typefast-web
+    spec:
+      containers:
+        - name: typefast-web
+          image: aay6ush/typefast-web:latest
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - name: env
+              mountPath: /app/.env
+              subPath: .env
+      volumes:
+        - name: env
+          secret:
+            secretName: typefast-secret
+            items:
+              - key: .env
+                path: .env
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: typefast-web
+spec:
+  selector:
+    app: typefast-web
+  ports:
+    - port: 80
+      targetPort: 3000

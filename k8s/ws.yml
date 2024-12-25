@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: typefast-ws
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: typefast-ws
+  template:
+    metadata:
+      labels:
+        app: typefast-ws
+    spec:
+      containers:
+        - name: typefast-ws
+          image: aay6ush/typefast-ws:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: REDIS_URL
+              value: "redis://redis.default.svc.cluster.local:6379"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: typefast-ws
+spec:
+  selector:
+    app: typefast-ws
+  ports:
+    - port: 80
+      targetPort: 8080
