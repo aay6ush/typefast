@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/aay6ush/typefast.git
-    targetRevision: dev
+    targetRevision: HEAD
     path: k8s
   destination:
     namespace: default
