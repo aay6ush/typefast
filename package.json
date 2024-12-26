@@ -5,6 +5,7 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
+    "db:setup": "cd packages/db && yarn db:setup",
     "prisma:generate": "cd packages/db && yarn db:generate",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },

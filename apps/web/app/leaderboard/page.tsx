@@ -126,38 +126,40 @@ const Leaderboard = () => {
       <motion.div variants={itemVariants}>
         <Card className="bg-neutral-900/50 border-neutral-800 shadow-lg">
           <CardHeader className="pb-2">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-2 sm:space-y-0">
-              <CardTitle className="text-2xl flex items-center space-x-3 text-neutral-200">
-                <CrownIcon className="size-8 text-yellow-400" />
+            <div className="flex flex-col space-y-4 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
+              <CardTitle className="text-xl sm:text-2xl flex items-center space-x-3 text-neutral-200">
+                <CrownIcon className="size-6 sm:size-8 text-yellow-400" />
                 <span>Leaderboard</span>
-                <Badge variant="secondary">Updates in {countdown}s</Badge>
+                <Badge variant="secondary" className="text-xs sm:text-sm">
+                  Updates in {countdown}s
+                </Badge>
               </CardTitle>
-              <div className="flex items-center space-x-4">
-                <div className="flex items-center space-x-1 bg-neutral-800 rounded-md p-1">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
+                <div className="w-full flex items-center space-x-1 bg-neutral-800 rounded-md p-1">
                   <Button
                     variant="ghost"
                     size="sm"
-                    className={`text-sm ${
+                    className={`w-full text-xs sm:text-sm ${
                       isAllTime
                         ? "bg-neutral-700 text-neutral-200"
                         : "text-neutral-400"
                     }`}
                     onClick={() => setIsAllTime(true)}
                   >
-                    <Activity />
+                    <Activity className="size-3 sm:size-4 mr-1" />
                     All-Time
                   </Button>
                   <Button
                     variant="ghost"
                     size="sm"
-                    className={`text-sm ${
+                    className={`w-full text-xs sm:text-sm ${
                       !isAllTime
                         ? "bg-neutral-700 text-neutral-200"
                         : "text-neutral-400"
                     }`}
                     onClick={() => setIsAllTime(false)}
                   >
-                    <Hourglass />
+                    <Hourglass className="size-3 sm:size-4 mr-1" />
                     Daily
                   </Button>
                 </div>
@@ -165,13 +167,13 @@ const Leaderboard = () => {
                   <DropdownMenuTrigger asChild>
                     <Button
                       variant="outline"
-                      className="bg-neutral-800 border-neutral-700 text-neutral-200"
+                      className="bg-neutral-800 border-neutral-700 text-neutral-200 text-xs sm:text-sm w-full sm:w-auto"
                     >
                       {selectedMode === "all"
                         ? "All Modes"
                         : selectedMode.charAt(0).toUpperCase() +
                           selectedMode.slice(1)}
-                      <ChevronDown />
+                      <ChevronDown className="ml-2 size-3 sm:size-4" />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="bg-neutral-800 border-neutral-700">
@@ -202,7 +204,7 @@ const Leaderboard = () => {
                 placeholder="Search by name..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="bg-neutral-800 border-neutral-700 text-gray-100"
+                className="bg-neutral-800 border-neutral-700 text-gray-100 w-full"
               />
             </div>
             <div className="overflow-x-auto">
@@ -218,11 +220,15 @@ const Leaderboard = () => {
                         <TableHead className="text-gray-300">Rank</TableHead>
                         <TableHead className="text-gray-300">Name</TableHead>
                         <TableHead className="text-gray-300">WPM</TableHead>
-                        <TableHead className="text-gray-300">
+                        <TableHead className="text-gray-300 hidden sm:table-cell">
                           Accuracy
                         </TableHead>
-                        <TableHead className="text-gray-300">Time</TableHead>
-                        <TableHead className="text-gray-300">Mode</TableHead>
+                        <TableHead className="text-gray-300 hidden md:table-cell">
+                          Time
+                        </TableHead>
+                        <TableHead className="text-gray-300 hidden lg:table-cell">
+                          Mode
+                        </TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -234,7 +240,7 @@ const Leaderboard = () => {
                           <TableCell className="font-medium text-gray-100">
                             {entry.rank <= 3 ? (
                               <Medal
-                                className={`w-5 h-5 ${getMedalColor(
+                                className={`size-4 sm:size-5 ${getMedalColor(
                                   entry.rank
                                 )}`}
                               />
@@ -248,13 +254,13 @@ const Leaderboard = () => {
                           <TableCell className="text-sky-400">
                             {entry.wpm}
                           </TableCell>
-                          <TableCell className="text-emerald-400">
+                          <TableCell className="text-emerald-400 hidden sm:table-cell">
                             {entry.accuracy}%
                           </TableCell>
-                          <TableCell className="text-violet-400">
+                          <TableCell className="text-violet-400 hidden md:table-cell">
                             {entry.time}s
                           </TableCell>
-                          <TableCell className="text-gray-300">
+                          <TableCell className="text-gray-300 hidden lg:table-cell">
                             {entry.mode}
                           </TableCell>
                         </TableRow>
@@ -269,10 +275,10 @@ const Leaderboard = () => {
       </motion.div>
 
       <motion.div variants={itemVariants} className="flex justify-center">
-        <Button size="lg" asChild>
+        <Button size="lg" asChild className="w-full sm:w-auto">
           <Link href="/type">
             Start New Race
-            <ArrowRight />
+            <ArrowRight className="ml-2" />
           </Link>
         </Button>
       </motion.div>

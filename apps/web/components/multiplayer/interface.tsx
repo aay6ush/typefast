@@ -11,8 +11,8 @@ const Interface = ({ mode, modeOption, text, onProgress }: InterfaceProps) => {
   const [caretPosition, setCaretPosition] = useState({ top: 0, left: 0 });
 
   const [timePassed, setTimePassed] = useState<number>(0);
-  const [timeStarted, setTimeStarted] = useState<boolean>(false);
-  const [raceStarted, setRaceStarted] = useState<boolean>(false);
+  const [timeStarted, setTimeStarted] = useState<boolean>(true);
+  const [raceStarted, setRaceStarted] = useState<boolean>(true);
   const [raceCompleted, setRaceCompleted] = useState<boolean>(false);
 
   const [wpm, setWpm] = useState<number>(0);
@@ -50,13 +50,6 @@ const Interface = ({ mode, modeOption, text, onProgress }: InterfaceProps) => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [updateCaretPosition]);
-
-  useEffect(() => {
-    if (userInput.length === 1 && !timeStarted) {
-      setRaceStarted(true);
-      setTimeStarted(true);
-    }
-  }, [userInput, timeStarted]);
 
   useEffect(() => {
     let timer: NodeJS.Timeout | null = null;

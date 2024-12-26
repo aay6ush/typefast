@@ -30,7 +30,9 @@ const Race = ({
     }
 
     if (isAllTypistFinished) {
-      setIsRaceStarted(false);
+      setTimeout(() => {
+        setIsRaceStarted(false);
+      }, 5000);
     }
   }, [members]);
 

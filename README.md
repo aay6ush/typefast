@@ -1,81 +1,76 @@
-# Turborepo starter
+# TypeFast ⚡
 
-This is an official starter Turborepo.
+A modern, minimalist typing speed test application built with Next.js.
 
-## Using this example
+![TypeFast Preview](preview.png)
 
-Run the following command:
+## Features 🚀
 
-```sh
-npx create-turbo@latest
-```
+- **Real-time Feedback**: Get instant feedback of your typing speed, and accuracy.
+- **Challenge Friends**: Compete with friends in real-time typing races.
+- **Global Leaderboard**: Compete with typists worldwide
+- **Customizable Options**: Choose from different typing modes to suit your needs.
+- **Daily Rankings**: Fresh competition every day
+- **Detailed Statistics**: Track progress over time with comprehensive stats.
+- **Minimalist UI**: Distraction-free sleek design that enhances your focus.
 
-## What's inside?
+## Tech Stack 💻
 
-This Turborepo includes the following packages/apps:
+- [Next.js](https://nextjs.org/) – React Framework
+- [TypeScript](https://www.typescriptlang.org/) - Language
+- [Tailwind](https://tailwindcss.com/) – CSS
+- [Shadcn UI](https://ui.shadcn.com/) – UI Library
+- [Framer Motion](https://motion.dev/) – Animation
+- [Upstash](https://upstash.com/) Redis
+- [Prisma](https://www.prisma.io/) – ORM
+- [Auth.js](https://authjs.dev/) – Authentication
+- [Turborepo](https://turbo.build/repo) – Monorepo
+- [Zustand](https://zustand-demo.pmnd.rs/) – State Management
+- [Resend](https://resend.com/) – Emails
+- [Docker](https://www.docker.com/) – Containerization
+- [PostgreSQL](https://neon.tech/) – Database
+- [Kubernetes](https://kubernetes.io/) Deployments
 
-### Apps and Packages
+## Getting Started 🌟
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+1. **Clone the repository**
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+   ```bash
+   git clone https://github.com/yourusername/typefast.git
+   cd typefast
+   ```
 
-### Utilities
+2. **Install dependencies**
 
-This Turborepo has some additional tools already setup for you:
+   ```bash
+   yarn
+   ```
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+3. **Set up environment variables**
 
-### Build
+   ```bash
+   cp ./apps/web/.env.example ./apps/web/.env
+   cp ./packages/db/.env.example ./packages/db/.env
+   ```
 
-To build all apps and packages, run the following command:
+4. **Set up database**
 
-```
-cd my-turborepo
-pnpm build
-```
+   ```bash
+   yarn db:setup
+   ```
 
-### Develop
+5. **Start development server**
 
-To develop all apps and packages, run the following command:
+   ```bash
+   yarn dev
+   ```
 
-```
-cd my-turborepo
-pnpm dev
-```
+6. **Visit localhost:3000**
 
-### Remote Caching
+## Contributing 🤝
 
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
+## License 📝
 
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
