@@ -129,7 +129,7 @@ const Interface = ({ mode, modeOption, text, onProgress }: InterfaceProps) => {
     if (raceStarted && timePassed > 0) {
       const currentWpm = calculateWPM(userInput.length, timePassed);
       const currentAccuracy = calculateAccuracy(userInput, text);
-      const progress = ((userInput.length + 1) / text.length) * 100;
+      const progress = (userInput.length / text.length) * 100;
 
       setWpm(currentWpm);
       setAccuracy(currentAccuracy);
