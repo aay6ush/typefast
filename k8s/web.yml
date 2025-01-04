@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: typefast-web
-          image: aay6ush/typefast-web:41e80d63f8e8b3577b172c5b3712e782b7f01f8c
+          image: aay6ush/typefast-web:47a8a7f4f070ec4cdc7a5d2f7e2fccc982f13ef4
           ports:
             - containerPort: 3000
           volumeMounts:
