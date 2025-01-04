@@ -107,9 +107,11 @@ const Interface = ({ mode, modeOption, text, onProgress }: InterfaceProps) => {
 
     const finalWpm = calculateWPM(userInput.length, timePassed);
     const finalAccuracy = calculateAccuracy(userInput, text);
+    const finalProgress = ((userInput.length + 1) / text.length) * 100;
 
     setWpm(finalWpm);
     setAccuracy(finalAccuracy);
+    onProgress(finalAccuracy, finalAccuracy, finalProgress);
 
     setWpmData((prev) => {
       const lastEntry = prev[prev.length - 1];

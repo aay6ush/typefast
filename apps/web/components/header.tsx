@@ -2,8 +2,7 @@
 
 import { Zap, LogOut } from "lucide-react";
 import Link from "next/link";
-import { Button, buttonVariants } from "@repo/ui/components/ui/button";
-import { cn } from "@/lib/utils";
+import { Button } from "@repo/ui/components/ui/button";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import {
@@ -28,18 +27,17 @@ export const Header = () => {
           Type<span className="text-emerald-400">Fast</span>
         </p>
       </Link>
-      <nav className="flex space-x-1.5 items-center">
+      <nav className="flex items-center gap-x-5">
         <TooltipProvider>
           {NAVLINKS.map((link) => (
             <Tooltip key={link.id}>
               <TooltipTrigger>
                 <Link
                   href={link.href}
-                  className={cn(
-                    buttonVariants({ variant: "ghost", size: "icon" })
-                  )}
+                  className="flex items-center gap-x-2.5 hover:text-white transition-colors duration-300"
                 >
-                  <link.icon className="!size-6" />
+                  <link.icon />
+                  <p className="hidden md:block">{link.name}</p>
                 </Link>
               </TooltipTrigger>
               <TooltipContent>

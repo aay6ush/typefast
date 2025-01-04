@@ -16,7 +16,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@repo/ui/components/ui/form";
 import { Input } from "@repo/ui/components/ui/input";
@@ -27,8 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@repo/ui/components/ui/select";
-import { Switch } from "@repo/ui/components/ui/switch";
-import { modes, timeOptions, wordOptions } from "@/constants";
+import { wordOptions } from "@/constants";
 import { toast } from "sonner";
 import { roomSchema, RoomValues } from "@repo/common/schemas";
 import { useTransition } from "react";
@@ -40,12 +38,10 @@ const CreateRoom = () => {
     resolver: zodResolver(roomSchema),
     defaultValues: {
       name: "",
-      mode: "",
+      mode: "words",
       modeOption: "",
     },
   });
-
-  const mode = form.watch("mode");
 
   const onSubmit = (data: RoomValues) => {
     startTransition(async () => {
@@ -111,15 +107,12 @@ const CreateRoom = () => {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent className="bg-neutral-800 border-neutral-700">
-                        {modes.map((mode) => (
-                          <SelectItem
-                            key={mode}
-                            value={mode}
-                            className="text-neutral-400 cursor-pointer"
-                          >
-                            {mode.charAt(0).toUpperCase() + mode.slice(1)}
-                          </SelectItem>
-                        ))}
+                        <SelectItem
+                          value={"words"}
+                          className="text-neutral-400 cursor-pointer"
+                        >
+                          Words
+                        </SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -142,31 +135,15 @@ const CreateRoom = () => {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent className="bg-neutral-800 border-neutral-700">
-                        {mode === "words" ? (
-                          <>
-                            {wordOptions.map((option) => (
-                              <SelectItem
-                                key={option}
-                                value={String(option)}
-                                className="text-neutral-400 cursor-pointer"
-                              >
-                                {option} words
-                              </SelectItem>
-                            ))}
-                          </>
-                        ) : (
-                          <>
-                            {timeOptions.map((option) => (
-                              <SelectItem
-                                key={option}
-                                value={String(option)}
-                                className="text-neutral-400 cursor-pointer"
-                              >
-                                {option} seconds
-                              </SelectItem>
-                            ))}
-                          </>
-                        )}
+                        {wordOptions.map((option) => (
+                          <SelectItem
+                            key={option}
+                            value={String(option)}
+                            className="text-neutral-400 cursor-pointer"
+                          >
+                            {option} words
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                     <FormMessage />

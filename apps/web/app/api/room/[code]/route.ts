@@ -25,7 +25,7 @@ export const GET = async (
 
     return NextResponse.json(room);
   } catch (error) {
-    console.log("Error fetching room: ", error);
+    console.error("Error fetching room: ", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

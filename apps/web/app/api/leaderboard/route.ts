@@ -97,7 +97,6 @@ export const POST = async (request: NextRequest) => {
 
     for (let i = 0; i < allTimeScores.length; i += 2) {
       const entry = allTimeScores[i] as LeaderboardEntry;
-      console.log("ENTRY", entry);
       if (entry.name === session.user.name) {
         await redis.zrem(ALL_TIME_LEADERBOARD, allTimeScores[i]);
       }
