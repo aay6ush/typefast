@@ -21,7 +21,7 @@ A modern, minimalist typing speed test application built with Next.js.
 - [Tailwind](https://tailwindcss.com/) – CSS
 - [Shadcn UI](https://ui.shadcn.com/) – UI Library
 - [Framer Motion](https://motion.dev/) – Animation
-- [Upstash](https://upstash.com/) Redis
+- [Ioredis](https://www.npmjs.com/package/ioredis/) Redis
 - [Prisma](https://www.prisma.io/) – ORM
 - [Auth.js](https://authjs.dev/) – Authentication
 - [Turborepo](https://turbo.build/repo) – Monorepo
