@@ -5,12 +5,6 @@ import Link from "next/link";
 import { Button } from "@repo/ui/components/ui/button";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@repo/ui/components/ui/tooltip";
 import { NAVLINKS } from "@/constants";
 
 export const Header = () => {
@@ -27,43 +21,28 @@ export const Header = () => {
           Type<span className="text-emerald-400">Fast</span>
         </p>
       </Link>
-      <nav className="flex items-center gap-x-5">
-        <TooltipProvider>
-          {NAVLINKS.map((link) => (
-            <Tooltip key={link.id}>
-              <TooltipTrigger>
-                <Link
-                  href={link.href}
-                  className="flex items-center gap-x-2.5 hover:text-white transition-colors duration-300"
-                >
-                  <link.icon />
-                  <p className="hidden md:block">{link.name}</p>
-                </Link>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{link.name}</p>
-              </TooltipContent>
-            </Tooltip>
-          ))}
+      <nav className="flex items-center gap-x-6">
+        {NAVLINKS.map((link) => (
+          <Link
+            key={link.name}
+            href={link.href}
+            className="flex items-center gap-x-2.5 hover:text-white transition-colors duration-300"
+          >
+            <link.icon />
+            <p className="hidden md:block">{link.name}</p>
+          </Link>
+        ))}
 
-          {session && (
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => signOut()}
-                  className="hover:bg-red-500 hover:text-white transition-colors duration-300"
-                >
-                  <LogOut className="!size-6" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Sign Out</p>
-              </TooltipContent>
-            </Tooltip>
-          )}
-        </TooltipProvider>
+        {session && (
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => signOut()}
+            className="hover:bg-red-500 hover:text-white transition-colors duration-300"
+          >
+            <LogOut className="!size-6" />
+          </Button>
+        )}
       </nav>
     </header>
   );

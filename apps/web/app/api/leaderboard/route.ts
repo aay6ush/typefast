@@ -16,15 +16,12 @@ export const GET = async (request: NextRequest) => {
     timeFrame === "daily" ? DAILY_LEADERBOARD : ALL_TIME_LEADERBOARD;
 
   try {
-    const scores = await redis.zrange(leaderboardKey, 0, -1, {
-      rev: true,
-      withScores: true,
-    });
+    const scores = await redis.zrevrange(leaderboardKey, 0, -1, "WITHSCORES");
 
     const userHighestScores = new Map<string, LeaderboardDataType>();
 
     for (let i = 0; i < scores.length; i += 2) {
-      const userData = scores[i] as LeaderboardEntry;
+      const userData = JSON.parse(scores[i]!) as LeaderboardEntry;
 
       if (mode === "all" || userData.mode === mode) {
         if (!userHighestScores.has(userData.name)) {
@@ -88,30 +85,36 @@ export const POST = async (request: NextRequest) => {
       timestamp: Date.now(),
     });
 
-    const allTimeScores = await redis.zrange(ALL_TIME_LEADERBOARD, 0, -1, {
-      withScores: true,
-    });
-    const dailyScores = await redis.zrange(DAILY_LEADERBOARD, 0, -1, {
-      withScores: true,
-    });
+    const allTimeScores = await redis.zrange(
+      ALL_TIME_LEADERBOARD,
+      0,
+      -1,
+      "WITHSCORES"
+    );
+    const dailyScores = await redis.zrange(
+      DAILY_LEADERBOARD,
+      0,
+      -1,
+      "WITHSCORES"
+    );
 
     for (let i = 0; i < allTimeScores.length; i += 2) {
-      const entry = allTimeScores[i] as LeaderboardEntry;
+      const entry = JSON.parse(allTimeScores[i]!) as LeaderboardEntry;
       if (entry.name === session.user.name) {
-        await redis.zrem(ALL_TIME_LEADERBOARD, allTimeScores[i]);
+        await redis.zrem(ALL_TIME_LEADERBOARD, allTimeScores[i]!);
       }
     }
 
     for (let i = 0; i < dailyScores.length; i += 2) {
-      const entry = dailyScores[i] as LeaderboardEntry;
+      const entry = JSON.parse(dailyScores[i]!) as LeaderboardEntry;
       if (entry.name === session.user.name) {
-        await redis.zrem(DAILY_LEADERBOARD, dailyScores[i]);
+        await redis.zrem(DAILY_LEADERBOARD, dailyScores[i]!);
       }
     }
 
     await Promise.all([
-      redis.zadd(ALL_TIME_LEADERBOARD, { score, member: userData }),
-      redis.zadd(DAILY_LEADERBOARD, { score, member: userData }),
+      redis.zadd(ALL_TIME_LEADERBOARD, score, userData),
+      redis.zadd(DAILY_LEADERBOARD, score, userData),
     ]);
 
     const midnight = new Date();

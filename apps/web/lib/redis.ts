@@ -1,11 +1,7 @@
-import { Redis } from "@upstash/redis";
+import Redis from "ioredis";
 
-const url = process.env.UPSTASH_REDIS_REST_URL ?? "";
-const token = process.env.UPSTASH_REDIS_REST_TOKEN ?? "";
+const URL = process.env.REDIS_URL || "redis://localhost:6379";
 
-const redis = new Redis({
-  url,
-  token,
-});
+const redis = new Redis(URL);
 
 export default redis;
