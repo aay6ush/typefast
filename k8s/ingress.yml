@@ -9,10 +9,10 @@ spec:
   tls:
     - hosts:
         - typefast.club
-      secretName: typefast-tls
+      secretName: typefast-cert-tls
     - hosts:
         - ws.typefast.club
-      secretName: typefast-ws-tls
+      secretName: typefast-ws-cert-tls
   rules:
     - host: typefast.club
       http:

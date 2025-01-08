@@ -4,7 +4,7 @@ metadata:
   name: typefast-cert
   namespace: default
 spec:
-  secretName: typefast-tls
+  secretName: typefast-cert-tls
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
@@ -18,7 +18,7 @@ metadata:
   name: typefast-ws-cert
   namespace: default
 spec:
-  secretName: typefast-ws-tls
+  secretName: typefast-ws-cert-tls
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
